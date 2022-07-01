@@ -5,6 +5,9 @@ session_start();
 define("URL", str_replace("index.php", "", (isset($_SERVER['HTTPS']) ? "https" : "http") .
     "://" . $_SERVER['HTTP_HOST'] . $_SERVER["PHP_SELF"]));
 
+require_once('./controllers/MainController.controller.php');
+$mainController = new MainController();
+
 try {
     if (empty($_GET['page'])) {
         $page = "accueil";
@@ -15,7 +18,7 @@ try {
 
     switch ($page) {
         case "accueil":
-            // $mainController->accueil();
+            $mainController->accueil();
             print_r("accueil");
             break;
 
@@ -24,5 +27,5 @@ try {
             throw new Exception("La page n'existe pas");
     }
 } catch (Exception $e) {
-    print_r($e->getMessage());
+    $mainController->ErrorPage($e->getMessage());
 }
