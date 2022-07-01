@@ -17,12 +17,14 @@
 </head>
 
 <body>
+    <?php require_once("menu.php") ?>
     <div class="body_container">
         <?= $page_content; ?>
     </div>
+    <?php require_once("footer.php") ?>
     <?php if (!empty($page_javascript)) : ?>
         <?php foreach ($page_javascript as $fichier_javascript) : ?>
-            <script src="<?= URL ?>public/JavaScript/<?= $fichier_javascript ?>"></script>
+            <script src="<?= URL ?>public/JS/<?= $fichier_javascript ?>"></script>
         <?php endforeach; ?>
     <?php endif; ?>
 </body>
