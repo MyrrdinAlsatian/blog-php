@@ -3,7 +3,7 @@
 require_once("models/MainManager.model.php");
 
 
-class MainController
+abstract class MainController
 {
 
     private $mainManager;
@@ -13,7 +13,7 @@ class MainController
         $this->mainManager = new MainManager();
     }
 
-    private function generatePage($data): void
+    protected function generatePage($data): void
     {
         extract($data);
         ob_start();
@@ -22,19 +22,19 @@ class MainController
         require_once($template);
     }
 
-    public  function accueil()
-    {
+    // public  function accueil()
+    // {
 
-        $data_page = [
-            "page_description" => " Blog OpenClassroom",
-            "page_title" => "Blog jb",
-            'view' => "views/accueil.view.php",
-            "template" => "views/common/template.php"
-        ];
-        $this->generatePage($data_page);
-    }
+    //     $data_page = [
+    //         "page_description" => " Blog OpenClassroom",
+    //         "page_title" => "Blog jb",
+    //         'view' => "views/accueil.view.php",
+    //         "template" => "views/common/template.php"
+    //     ];
+    //     $this->generatePage($data_page);
+    // }
 
-    public function ErrorPage($msg): void
+    protected function ErrorPage($msg): void
     {
         $data_page = [
             "page_description" => "Page permettant de gérer les erreurs",
