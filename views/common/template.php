@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="<?= $page_description; ?>">
     <title><?= $page_title; ?></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="<?= URL ?>public/CSS/main.css" rel="stylesheet" />
     <?php if (!empty($page_css)) : ?>
         <?php foreach ($page_css as $fichier_css) : ?>
@@ -19,6 +19,16 @@
 <body>
     <?php require_once("menu.php") ?>
     <div class="body_container">
+        <?php
+        if (!empty($_SESSION['alert'])) {
+            foreach ($_SESSION['alert'] as $alert) {
+                echo "<div class='alert " . $alert['type'] . "' role='alert'>
+                        " . $alert['message'] . "
+                    </div>";
+            }
+            unset($_SESSION['alert']);
+        }
+        ?>
         <?= $page_content; ?>
     </div>
     <?php require_once("footer.php") ?>
