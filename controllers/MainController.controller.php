@@ -10,7 +10,7 @@ abstract class MainController
 
     public function __construct()
     {
-        $this->mainManager = new MainManager();
+        // $this->mainManager = new MainManager();
     }
 
     protected function generatePage($data): void
