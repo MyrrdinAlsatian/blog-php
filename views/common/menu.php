@@ -2,7 +2,7 @@
     <nav class="navigation__nav" role="navigation" aria-label="main">
         <ul class="navigation__list">
             <li class="navigation__item">
-                <a class="navigation__link" href="/about">About me</a>
+                <a class="navigation__link" href="<?= URL ?>">About me</a>
             </li>
 
             <li class="navigation__item">
