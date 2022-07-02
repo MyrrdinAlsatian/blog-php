@@ -1,4 +1,4 @@
 <?php
-require_once("accueil/hero.php");
-require_once("accueil/grid.php");
-require_once("accueil/jumbotron.php");
+require_once("components/hero.php");
+require_once("components/grid.php");
+require_once("components/jumbotron.php");
