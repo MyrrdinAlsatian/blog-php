@@ -40,6 +40,16 @@ try {
             }
             print_r($_POST);
             break;
+        case 'backoffice':
+            echo $url[1];
+            switch ($url[1]) {
+                case 'profile':
+                    $visitorController->accueil();
+                    break;
+                default:
+                    throw new Exception("ce profile n'existe pas");
+            }
+            break;
         default:
             throw new Exception("La page n'existe pas");
     }
