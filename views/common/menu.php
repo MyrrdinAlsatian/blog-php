@@ -12,7 +12,7 @@
                 <a class="navigation__link" href="/contact">Contact</a>
             </li>
         </ul>
-        <a type="button" class="btn--custom btn-primary--custom" href="./login">Login</a>
+        <a type="button" class="btn--custom btn-primary--custom" href="<?= URL ?>login">Login</a>
 
     </nav>
 </div>
