@@ -17,22 +17,34 @@ class CommentatorController extends MainController
         if ($this->commentatorManager->isCredentialsValid($mail, $password)) {
 
             if ($this->commentatorManager->isAccountValid($mail)) {
-                Toolbox::ajouterMessageAlerte("Connexion réussi", Toolbox::COULEUR_VERTE);
-                $_SESSION['profile'] = [
+                $_SESSION["profile"] = [
                     "mail" => $mail
                 ];
+                Toolbox::ajouterMessageAlerte("Connexion réussi", Toolbox::COULEUR_VERTE);
                 header('Location: ' . URL . "backoffice/profile");
             } else {
                 Toolbox::ajouterMessageAlerte("Le compte de " . $mail . " n'est pas encore actif", Toolbox::COULEUR_ORANGE);
                 header('Location: ' . URL . "login");
             }
-            echo "TUTU";
         } else {
             Toolbox::ajouterMessageAlerte("Cette combinaison Email/mot de passe n'est pas valide", Toolbox::COULEUR_ROUGE);
             header('Location: ' . URL . "login");
         }
     }
 
+    public function profile()
+    {
+        $userData = $this->commentatorManager->getUserData($_SESSION["profile"]['mail']);
+        print_r($userData);
+        $data_page = [
+            "page_description" => " Blog OpenClassroom",
+            "page_title" => "Profile de " . $_SESSION["profile"]['mail'] . "",
+            "user" => $userData,
+            'view' => "views/Commentator/profile.view.php",
+            "template" => "views/common/admin.template.php"
+        ];
+        $this->generatePage($data_page);
+    }
     public function ErrorPage($msg): void
     {
         parent::ErrorPage($msg);

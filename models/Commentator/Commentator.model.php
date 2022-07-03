@@ -36,4 +36,13 @@ class CommentatorManager extends MainManager
         $req->closeCursor();
         return $datas;
     }
+    public function getUserData($cd)
+    {
+        $req = $this->getBdd()->prepare('SELECT * FROM user WHERE email = :mail');
+        $req->bindValue(':mail', $cd, PDO::PARAM_STR);
+        $req->execute();
+        $datas = $req->fetch(PDO::FETCH_ASSOC);
+        $req->closeCursor();
+        return $datas;
+    }
 }

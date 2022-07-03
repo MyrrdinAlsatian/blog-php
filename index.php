@@ -44,7 +44,7 @@ try {
             echo $url[1];
             switch ($url[1]) {
                 case 'profile':
-                    $visitorController->accueil();
+                    $userController->profile();
                     break;
                 default:
                     throw new Exception("ce profile n'existe pas");
