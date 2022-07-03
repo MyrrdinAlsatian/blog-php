@@ -20,7 +20,7 @@
 <body>
     <?php // $isAdmin ? "is-admin" : "not-admin" 
     ?>
-    <div class="content ">
+    <div class="content is-admin">
         <?php require_once("admin.menu.php") ?>
         <main>
             <?php
@@ -45,8 +45,8 @@
                 <div class="profile">
                     <div class="info">
                         <p>
-                            Hey, <b>John</b>
-                            <small class="text-muted">Admin</small>
+                            Hey, <b><?= $user['username'] ?></b>
+                            <small class="text-muted"><?= Toolbox::displayRole($user['role']) ?></small>
                         </p>
                     </div>
                 </div>
