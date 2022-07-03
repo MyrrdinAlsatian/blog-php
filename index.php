@@ -40,6 +40,9 @@ try {
             }
             print_r($_POST);
             break;
+        case "logout":
+            $userController->logout();
+            break;
         case 'backoffice':
             echo $url[1];
             switch ($url[1]) {

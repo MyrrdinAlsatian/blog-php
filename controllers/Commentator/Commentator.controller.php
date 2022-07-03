@@ -32,6 +32,12 @@ class CommentatorController extends MainController
         }
     }
 
+    public function logout()
+    {
+        Toolbox::ajouterMessageAlerte("La déconnexion a bien été éffectué", Toolbox::COULEUR_VERTE);
+        unset($_SESSION['profile']);
+        header('Location: ' . URL . "/accueil");
+    }
     public function profile()
     {
         $userData = $this->commentatorManager->getUserData($_SESSION["profile"]['mail']);
