@@ -12,4 +12,22 @@ class Toolbox
             "type" => $type
         ];
     }
+    public static function displayRole($role): string
+    {
+        switch ((int)$role) {
+            case 0:
+                return 'Non-inscrit';
+                break;
+            case 1:
+                return 'inscrit';
+                break;
+            case 2:
+                return 'Admin';
+                break;
+
+            default:
+                return 'Non-inscrit';
+                break;
+        }
+    }
 }
