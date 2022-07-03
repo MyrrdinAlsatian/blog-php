@@ -36,6 +36,7 @@ class CommentatorController extends MainController
     {
         $userData = $this->commentatorManager->getUserData($_SESSION["profile"]['mail']);
         print_r($userData);
+        $_SESSION['profile']['role'] = $userData['role'];
         $data_page = [
             "page_description" => " Blog OpenClassroom",
             "page_title" => "Profile de " . $_SESSION["profile"]['mail'] . "",
