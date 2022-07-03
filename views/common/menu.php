@@ -12,10 +12,11 @@
                 <a class="navigation__link" href="/contact">Contact</a>
             </li>
         </ul>
-        <?php if (empty($_SESSION['profile'])) : ?>
+        <?php
+        if (empty($_SESSION["profile"])) : ?>
             <a type="button" class="btn--custom btn-primary--custom" href="<?= URL ?>login">Login</a>
         <?php else : ?>
-            <a type="button" class="btn--custom btn-primary--custom" href="<?= URL ?>backoffice\profile">Compte</a>
+            <a type="button" class="btn--custom btn-primary--custom" href="<?= URL ?>backoffice\profile">Mon Compte</a>
         <?php endif; ?>
     </nav>
 </div>
