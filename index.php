@@ -44,13 +44,17 @@ try {
             $userController->logout();
             break;
         case 'backoffice':
-            echo $url[1];
-            switch ($url[1]) {
-                case 'profile':
-                    $userController->profile();
-                    break;
-                default:
-                    throw new Exception("ce profile n'existe pas");
+            if (Security::isConnected()) {
+                switch ($url[1]) {
+                    case 'profile':
+                        $userController->profile();
+                        break;
+                    default:
+                        throw new Exception("ce profile n'existe pas");
+                }
+            } else {
+                Toolbox::ajouterMessageAlerte("Veuillez vous connectez !!", Toolbox::COULEUR_ROUGE);
+                header('Location: ' . URL . "login");
             }
             break;
         default:
