@@ -36,6 +36,17 @@ class VisitorController extends MainController
         $this->generatePage($data_page);
     }
 
+    public function register()
+    {
+        $data_page = [
+            "page_description" => " Page d'inscription",
+            "page_title" => "Inscription",
+            'view' => "views/Visitor/register.view.php",
+            "template" => "views/common/template.php"
+        ];
+        $this->generatePage($data_page);
+    }
+
     public function ErrorPage($msg): void
     {
         parent::ErrorPage($msg);

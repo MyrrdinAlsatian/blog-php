@@ -43,6 +43,9 @@ try {
         case "logout":
             $userController->logout();
             break;
+        case "register":
+            $visitorController->register();
+            break;
         case 'backoffice':
             if (Security::isConnected()) {
                 switch ($url[1]) {
