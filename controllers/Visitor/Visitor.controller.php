@@ -47,6 +47,29 @@ class VisitorController extends MainController
         $this->generatePage($data_page);
     }
 
+    public function validation_register($mail, $pseudo, $password)
+    {
+        echo "Register validation";
+        if ($this->visitorManager->isPseudoAvailable($pseudo)) {
+            if ($this->visitorManager->isMailAvailable($mail)) {
+                $passwordEncrypted = password_hash($password, PASSWORD_DEFAULT);
+                $key = rand(0, 999999); // rand
+                if ($this->visitorManager->createNewAccount($passwordEncrypted, $pseudo, $mail, $key)) {
+                    Toolbox::ajouterMessageAlerte('Le compte a bien été créer', Toolbox::COULEUR_VERTE);
+                    header('Location:' . URL . 'login');
+                } else {
+                    Toolbox::ajouterMessageAlerte('La création du compte a échoué, veuillez retenter', Toolbox::COULEUR_ROUGE);
+                    header('Location:' . URL . 'register');
+                }
+            } else {
+                Toolbox::ajouterMessageAlerte('Cette email est déjas liés à un compte', Toolbox::COULEUR_ORANGE);
+            }
+        } else {
+            Toolbox::ajouterMessageAlerte('Ce pseudo n\'est plus disponible', Toolbox::COULEUR_ORANGE);
+            header('Location: ' . URL . 'register');
+        }
+    }
+
     public function ErrorPage($msg): void
     {
         parent::ErrorPage($msg);

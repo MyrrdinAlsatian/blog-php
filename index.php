@@ -46,6 +46,22 @@ try {
         case "register":
             $visitorController->register();
             break;
+        case 'validation_register':
+            if (!empty($_POST["mail"] && !empty($_POST["password"])) && !empty($_POST['pseudo']) && !empty($_POST['confirmpassword'])) {
+                if ($_POST['confirmpassword'] !== $_POST['password']) {
+                    Toolbox::ajouterMessageAlerte("Veuillez re-confirmer votre mot de passe", Toolbox::COULEUR_ROUGE);
+                    header('Location: ' . URL . "register");
+                }
+                $mail = Security::emailSafe($_POST["mail"]);
+                $pseudo = Security::htmlSafe($_POST["pseudo"]);
+                $password = Security::htmlSafe($_POST["password"]);
+
+                $visitorController->validation_register($mail, $pseudo, $password);
+            } else {
+                Toolbox::ajouterMessageAlerte("Veuillez compléter tous les champs du formulaire", Toolbox::COULEUR_ROUGE);
+                header('Location: ' . URL . "register");
+            }
+            break;
         case 'backoffice':
             if (Security::isConnected()) {
                 switch ($url[1]) {
