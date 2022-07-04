@@ -13,4 +13,8 @@ class Security
     {
         return strip_tags(filter_var($mail, FILTER_SANITIZE_EMAIL));
     }
+    public static function isConnected(): bool
+    {
+        return (!empty($_SESSION["profile"]));
+    }
 }
