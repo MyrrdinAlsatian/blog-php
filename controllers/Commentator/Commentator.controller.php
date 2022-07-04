@@ -36,7 +36,7 @@ class CommentatorController extends MainController
     {
         Toolbox::ajouterMessageAlerte("La déconnexion a bien été éffectué", Toolbox::COULEUR_VERTE);
         unset($_SESSION['profile']);
-        header('Location: ' . URL . "/accueil");
+        header('Location: ' . URL . "accueil");
     }
     public function profile()
     {
