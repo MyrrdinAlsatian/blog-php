@@ -24,7 +24,6 @@ try {
     switch ($page) {
         case "accueil":
             $visitorController->accueil();
-            print_r("accueil");
             break;
         case "login":
             $visitorController->login();
