@@ -55,7 +55,8 @@ class VisitorController extends MainController
                 $passwordEncrypted = password_hash($password, PASSWORD_DEFAULT);
                 $key = rand(0, 999999); // rand
                 if ($this->visitorManager->createNewAccount($passwordEncrypted, $pseudo, $mail, $key)) {
-                    Toolbox::ajouterMessageAlerte('Le compte a bien été créer', Toolbox::COULEUR_VERTE);
+                    $this->sendValidationMail($mail, $key, $pseudo);
+                    Toolbox::ajouterMessageAlerte('Le compte a bien été créer, veuillez valider votre compte', Toolbox::COULEUR_VERTE);
                     header('Location:' . URL . 'login');
                 } else {
                     Toolbox::ajouterMessageAlerte('La création du compte a échoué, veuillez retenter', Toolbox::COULEUR_ROUGE);
@@ -68,6 +69,14 @@ class VisitorController extends MainController
             Toolbox::ajouterMessageAlerte('Ce pseudo n\'est plus disponible', Toolbox::COULEUR_ORANGE);
             header('Location: ' . URL . 'register');
         }
+    }
+
+    public function sendValidationMail($mail, $key, $username)
+    {
+        $validationUrl = URL . "validationMail/" . $username . "/" . $key;
+        $subject = "Création de compte sur " . URL;
+        $content = " Veuillez cliquer sur le liens pour valider votre compte : " . $validationUrl;
+        Toolbox::sendMail($mail, $subject, $content);
     }
 
     public function ErrorPage($msg): void
