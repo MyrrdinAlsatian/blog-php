@@ -3,10 +3,7 @@ module.exports = {
     types: [{
             value: '[✨ feat]',
             name: '✨   Features: Ajout/mise à jour de fonctionnalité',
-        }, {
-            value: '[🎉 New]',
-            name: '🎉   Nouveau projet',
-        },
+        }, 
         {
             value: '[🚧 WIP]',
             name: '🚧   Work-in-progress: en cour de développement',
@@ -20,6 +17,18 @@ module.exports = {
             name: '🔖   Release/Nouvelle version',
         },
         {
+            value: '[🖌 CSS]',
+            name: '🖌   Ajout/modif de l\'UI et du style CSS',
+        },
+        {
+            value: '[💬 text]',
+            name: '💬   Ajout/modif de texte',
+        },
+        {
+            value: '[♻️ refactor]',
+            name: '♻️   Modif. des sources n’étant ni un correctif, ni un ajout de fonctionnalité',
+        },
+        {
             value: '[🚑️ critical fix]',
             name: '🚑️   Fix urgent',
         },
@@ -28,36 +37,44 @@ module.exports = {
             name: '📝   Ajout/modif. de la documentation',
         },
         {
-            value: '[🎨 styles]',
-            name: '🎨   Modifs de style et de mise en forme du code (espacements, virgules, etc.)',
-        },
-        {
-            value: '[♻️ refactor]',
-            name: '♻️   Modif. des sources n’étant ni un correctif, ni un ajout de fonctionnalité',
-        },
-        {
             value: '[🚀 perf]',
             name: '🚀   Amélioration de la performance',
+        },
+        {
+            value: '[💚 chores]',
+            name: '💚   Autres mises à jour ne modifiant ni les sources, ni les tests',
         },
         {
             value: '[🧪 test]',
             name: '🧪   Ajout ou correction de tests',
         },
         {
+            value: '[👽️ external]',
+            name: '👽️   Mise à jour du a un changement lié à une API externe',
+        },
+        {
             value: '[👷 build]',
-            name: '👷   Modif. affectant le "build" ou les dépendances externes (exemples de contextes :  webpack, broccoli, npm)',
+            name: '👷   Modif. affectant le "build" ou les dépendances externes (exemples de contextes :  webpack, yarn)',
+        },
+        {
+            value: '[🎉 New]',
+            name: '🎉   Nouveau projet',
         },
         {
             value: '[🏗️ archi]',
             name: "🏗️   Modif. affectant l'architecture du projet ( renommage et/ou déplacement de fichier, dossier, ...)",
         },
         {
+            value: '[🎨 styles]',
+            name: '🎨   Modifs de style et de mise en forme du code (espacements, virgules, etc.)',
+        },
+        {
             value: '[⚙️ ci]',
             name: '⚙️   Modif. de la configuration ou des scripts liés à la CI (Gitlab, AWS, ...)',
         },
         {
-            value: '[💚 chores]',
-            name: '💚   Autres mises à jour ne modifiant ni les sources, ni les tests',
+            value: '[🔧 config]',
+            name: '🔧   Ajout/Modification des fichiers de configurations',
         },
         {
             value: '[🔀 merge]',
@@ -68,13 +85,64 @@ module.exports = {
             name: '🍱   Ajout et modification des assets',
         },
         {
-            value: '[⏪️ revert]',
-            name: '⏪️    Annuler (revert) un commit précédent',
+            value: '[🚢 deploy]',
+            name: '🚢   Ajout/modif du déploiement',
+        },
+        
+        {
+            value: '[🥚 easter]',
+            name: '🥚   Ajout/mise à jour d\'un easter egg',
+        },
+        {
+            value: '[💩 ....]',
+            name: '💩   Mauvais code, qui doit être amélioré',
+        },
+        {
+            value: '[🐋 docker]',
+            name: '🐋   Modification sur les fichier Docker'
+        },
+        {
+            value: '[📦️ package]',
+            name: '📦️   Ajout/Modif du package.json'
+        },{
+            value: '[➖ remove deps]',
+            name: '➖   Suppression d\'une dépendance'
+        },{
+            value: '[➕ add deps]',
+            name: '➕   Ajout d\'une dépendance'
         },
         {
             value: '[🗑 clean]',
             name: '🗑   Suppression de code non-utilisé',
         },
+        {
+            value: '[🔍️ SEO]',
+            name: '🔍️   Amélioration SEO'
+        },
+        {
+            value: '[⚗️ POC]',
+            name: '⚗️   Expérience/POC'
+        },
+        {
+            value: '[🗃️ BDD]',
+            name: '🗃️   Changement lié à la base de données'
+        },
+        {
+            value: '[⏪️ revert]',
+            name: '⏪️   Annuler (revert) un commit précédent',
+        },
+        {
+            value: '[👌 review]',
+            name: '👌   Modification suite à une code review'
+        },
+        {
+            value: '[👔 metier]',
+            name: '👔   Ajout/modif de la logique métier'
+        },
+        {
+            value: '[📱 responsive]',
+            name: '📱   Ajout/modif sur le responsive',
+        }
     ],
     scopes: [
         {
@@ -125,6 +193,9 @@ module.exports = {
         '[⚙️ ci]',
         '[🔀 merge]',
         '[⏪️ revert]',
+        '[🔧 config]',
+        '[👽️ external]',
+        '[🗃️ BDD]',
     ],
     // skip any questions you want
     // skipQuestions: ['body', 'breaking', 'footer'],
@@ -136,4 +207,3 @@ module.exports = {
     breakingPrefix: 'BREAKING CHANGE:',
     askForBreakingChangeFirst: false, // default is false
 };
-
