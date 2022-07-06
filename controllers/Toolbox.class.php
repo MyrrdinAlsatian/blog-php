@@ -1,4 +1,6 @@
 <?php
+
+require_once "./controllers/PhpMailer.class.php";
 class Toolbox
 {
     public const COULEUR_ROUGE = "alert-danger";
@@ -31,13 +33,19 @@ class Toolbox
         }
     }
 
-    public static function sendMail($sendTo, $subject, $content)
+    public static function sendMail()
     {
         $headers = "from: openclassroom@jbscreative.dev";
         $sendTo = "stephan.jeanba@gmail.com";
         $subject = "test subject";
         $content = "test content";
 
-        mail($sendTo, $subject, $content, $headers);
+        $mail = new Mailer();
+        $mail->setFrom('openclassroom@jbscreative.dev');
+        $mail->addReplyTo('openclassroom@jbscreative.dev');
+        $mail->Subject = $subject;
+        $mail->msgHTML($content);
+        $mail->addAddress($sendTo);
+        $mail->Send();
     }
 }
