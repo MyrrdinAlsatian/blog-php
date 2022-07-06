@@ -33,12 +33,12 @@ class Toolbox
         }
     }
 
-    public static function sendMail()
+    public static function sendMail($sendTo, $subject, $content)
     {
         $headers = "from: openclassroom@jbscreative.dev";
         $sendTo = "stephan.jeanba@gmail.com";
-        $subject = "test subject";
-        $content = "test content";
+        // $subject = "test subject";
+        // $content = "test content";
 
         $mail = new Mailer();
         $mail->setFrom('openclassroom@jbscreative.dev');
@@ -46,6 +46,10 @@ class Toolbox
         $mail->Subject = $subject;
         $mail->msgHTML($content);
         $mail->addAddress($sendTo);
-        $mail->Send();
+        if (!$mail->Send()) {
+            self::ajouterMessageAlerte('Le mail n\'a pas été envoyé à l\'adresse' . $sendTo, self::COULEUR_ROUGE);
+        } else {
+            self::ajouterMessageAlerte('Le mail a été envoyé à l\'adresse' . $sendTo, self::COULEUR_VERTE);
+        };
     }
 }
