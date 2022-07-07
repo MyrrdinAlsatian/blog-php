@@ -64,6 +64,17 @@ class CommentatorController extends MainController
         Toolbox::sendMail($mail, $subject, $content);
         header('Location: ' . URL . "login");
     }
+
+    public function validationMail($username, $key)
+    {
+        if ($this->commentatorManager->setValidAccount($username, $key)) {
+            Toolbox::ajouterMessageAlerte("Votre compte a été validé", Toolbox::COULEUR_VERTE);
+            header('Location: ' . URL . "backoffice/profile");
+        } else {
+            Toolbox::ajouterMessageAlerte("Votre compte n'a pas pu être validé", Toolbox::COULEUR_ROUGE);
+            header('Location: ' . URL . "register");
+        }
+    }
     public function ErrorPage($msg): void
     {
         parent::ErrorPage($msg);

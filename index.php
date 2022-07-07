@@ -66,10 +66,9 @@ try {
             break;
         case 'resendMailValidation':
             $userController->resendMailValidation($url[1]);
-            echo "Validation du mail";
             break;
         case 'validationMail':
-            echo "Validation du mail";
+            $userController->validationMail($url[1], $url[2]);
             break;
         case 'backoffice':
             if (Security::isConnected()) {

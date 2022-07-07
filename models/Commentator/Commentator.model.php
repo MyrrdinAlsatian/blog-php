@@ -45,4 +45,15 @@ class CommentatorManager extends MainManager
         $req->closeCursor();
         return $datas;
     }
+
+    public function setValidAccount($username, $key)
+    {
+        $req = $this->getBdd()->prepare('UPDATE user SET isValid = 1, role = 1 WHERE username = :username AND linkValid = :key');
+        $req->bindValue(':username', $username, PDO::PARAM_STR);
+        $req->bindValue(':key', $key, PDO::PARAM_INT);
+        $req->execute();
+        $validated = ($req->rowCount() > 0);
+        $req->closeCursor();
+        return $validated;
+    }
 }
