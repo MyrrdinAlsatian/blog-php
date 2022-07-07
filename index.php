@@ -64,6 +64,10 @@ try {
                 header('Location: ' . URL . "register");
             }
             break;
+        case 'resendMailValidation':
+            $userController->resendMailValidation($url[1]);
+            echo "Validation du mail";
+            break;
         case 'validationMail':
             echo "Validation du mail";
             break;
