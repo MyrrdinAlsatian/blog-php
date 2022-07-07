@@ -40,7 +40,6 @@ try {
                 Toolbox::ajouterMessageAlerte("Mot de passe ou email non renseigné", Toolbox::COULEUR_ROUGE);
                 header('Location: ' . URL . "login");
             }
-            print_r($_POST);
             break;
         case "logout":
             $userController->logout();
@@ -64,6 +63,9 @@ try {
                 Toolbox::ajouterMessageAlerte("Veuillez compléter tous les champs du formulaire", Toolbox::COULEUR_ROUGE);
                 header('Location: ' . URL . "register");
             }
+            break;
+        case 'validationMail':
+            echo "Validation du mail";
             break;
         case 'backoffice':
             if (Security::isConnected()) {
