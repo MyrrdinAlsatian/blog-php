@@ -67,4 +67,14 @@ class CommentatorManager extends MainManager
         $req->closeCursor();
         return $validated;
     }
+    public function setNewPassword($password, $mail)
+    {
+        $req = $this->getBdd()->prepare('UPDATE user SET password = :password WHERE email = :email');
+        $req->bindValue(':password', $password, PDO::PARAM_STR);
+        $req->bindValue(':email', $mail, PDO::PARAM_STR);
+        $req->execute();
+        $validated = ($req->rowCount() > 0);
+        $req->closeCursor();
+        return $validated;
+    }
 }

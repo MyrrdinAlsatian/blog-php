@@ -77,6 +77,7 @@ class CommentatorController extends MainController
             header('Location: ' . URL . "register");
         }
     }
+
     public function validationMailModification($mail)
     {
         if ($this->commentatorManager->setNewMail($mail, $_SESSION['profile']['username'])) {
@@ -98,6 +99,21 @@ class CommentatorController extends MainController
             "template" => "views/common/admin.template.php"
         ];
         $this->generatePage($data_page);
+    }
+    public function validationNewPassword($oldPassword, $newPassword)
+    {
+        $newPasswordEncrypted = password_hash($newPassword, PASSWORD_DEFAULT);
+        if ($this->commentatorManager->isCredentialsValid($_SESSION['profile']['mail'], $oldPassword)) {
+            if ($this->commentatorManager->setNewPassword($newPasswordEncrypted, $_SESSION['profile']['mail'])) {
+                Toolbox::ajouterMessageAlerte("Votre mot de passe a bien été modifié", Toolbox::COULEUR_VERTE);
+            } else {
+                Toolbox::ajouterMessageAlerte("Votre mot de passe n'a pas été modifié", Toolbox::COULEUR_ROUGE);
+            }
+            header('Location: ' . URL . "backoffice/passwordModification");
+        } else {
+            Toolbox::ajouterMessageAlerte("Cette veuillez renseigner votre mot de passe actuel", Toolbox::COULEUR_ORANGE);
+            header('Location: ' . URL . "backoffice/passwordModification");
+        }
     }
     public function ErrorPage($msg): void
     {

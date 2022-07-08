@@ -82,6 +82,29 @@ try {
                     case 'passwordModification':
                         $userController->passwordModification();
                         break;
+                    case 'validation_newPassword':
+                        if (
+                            !empty($_POST["newPassword"]) &&
+                            !empty($_POST["confirmPassword"]) &&
+                            !empty($_POST["oldPassword"])
+                        ) {
+
+                            if ($_POST['newPassword'] !== $_POST['confirmPassword']) {
+                                Toolbox::ajouterMessageAlerte("Veuillez re-confirmer votre mot de passe", Toolbox::COULEUR_ROUGE);
+                                header('Location: ' . URL . "backoffice/passwordModification");
+                            } else {
+
+                                $oldPassword = Security::htmlSafe($_POST["oldPassword"]);
+                                $newPassword = Security::htmlSafe($_POST["newPassword"]);
+
+                                $userController->validationNewPassword($oldPassword, $newPassword);
+                            }
+                        } else {
+                            Toolbox::ajouterMessageAlerte("Veuillez compléter tous les champs du formulaire", Toolbox::COULEUR_ROUGE);
+                            header('Location: ' . URL . "backoffice/passwordModification");
+                        }
+
+                        break;
                     default:
                         throw new Exception("ce profile n'existe pas");
                 }

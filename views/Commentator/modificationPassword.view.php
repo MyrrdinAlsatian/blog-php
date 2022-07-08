@@ -18,7 +18,7 @@
             Confirmer le nouveau mot de passe
         </label>
         <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" />
-        <div class="p-1 d-none bg-warning" id="alert">
+        <div class="mt-2 alert alert-warning d-none " id="alert">
             veuillez écrire le même mot de passe
         </div>
     </div>
