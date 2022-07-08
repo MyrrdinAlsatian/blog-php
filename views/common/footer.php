@@ -24,7 +24,10 @@
             <nav>
                 <ul>
                     <li><a href="#">Blog</a></li>
-                    <li><a href="#">Case study</a></li>
+                    <?php if (empty($_SESSION["profile"])) : ?>
+                        <li><a href="<?= URL ?>login">Connexion</a></li>
+                        <li><a href="<?= URL ?>register">Créer un compte</a></li>
+                    <?php endif; ?>
                 </ul>
             </nav>
         </div>

@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 session_start();
 
 
@@ -24,7 +27,6 @@ try {
     switch ($page) {
         case "accueil":
             $visitorController->accueil();
-            print_r("accueil");
             break;
         case "login":
             $visitorController->login();
@@ -38,10 +40,35 @@ try {
                 Toolbox::ajouterMessageAlerte("Mot de passe ou email non renseigné", Toolbox::COULEUR_ROUGE);
                 header('Location: ' . URL . "login");
             }
-            print_r($_POST);
             break;
         case "logout":
             $userController->logout();
+            break;
+        case "register":
+            $visitorController->register();
+            break;
+        case 'validation_register':
+            if (!empty($_POST["mail"] && !empty($_POST["password"])) && !empty($_POST['pseudo']) && !empty($_POST['confirmpassword'])) {
+                if ($_POST['confirmpassword'] !== $_POST['password']) {
+                    Toolbox::ajouterMessageAlerte("Veuillez re-confirmer votre mot de passe", Toolbox::COULEUR_ROUGE);
+                    header('Location: ' . URL . "register");
+                } else {
+
+                    $mail = Security::emailSafe($_POST["mail"]);
+                    $pseudo = Security::htmlSafe($_POST["pseudo"]);
+                    $password = Security::htmlSafe($_POST["password"]);
+                    $visitorController->validation_register($mail, $pseudo, $password);
+                }
+            } else {
+                Toolbox::ajouterMessageAlerte("Veuillez compléter tous les champs du formulaire", Toolbox::COULEUR_ROUGE);
+                header('Location: ' . URL . "register");
+            }
+            break;
+        case 'resendMailValidation':
+            $userController->resendMailValidation($url[1]);
+            break;
+        case 'validationMail':
+            $userController->validationMail($url[1], $url[2]);
             break;
         case 'backoffice':
             if (Security::isConnected()) {

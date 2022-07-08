@@ -23,7 +23,9 @@ class CommentatorController extends MainController
                 Toolbox::ajouterMessageAlerte("Connexion réussi", Toolbox::COULEUR_VERTE);
                 header('Location: ' . URL . "backoffice/profile");
             } else {
-                Toolbox::ajouterMessageAlerte("Le compte de " . $mail . " n'est pas encore actif", Toolbox::COULEUR_ORANGE);
+                $msg = "Le compte de " . $mail . " n'est pas encore actif&nbp;";
+                $msg .= " <a href='resendMailValidation/" . $mail . "'> Renvoyer le mail de confirmation </a>";
+                Toolbox::ajouterMessageAlerte($msg, Toolbox::COULEUR_ORANGE);
                 header('Location: ' . URL . "login");
             }
         } else {
@@ -34,7 +36,7 @@ class CommentatorController extends MainController
 
     public function logout()
     {
-        Toolbox::ajouterMessageAlerte("La déconnexion a bien été éffectué", Toolbox::COULEUR_VERTE);
+        Toolbox::ajouterMessageAlerte("La déconnexion a bien été effectué", Toolbox::COULEUR_VERTE);
         unset($_SESSION['profile']);
         header('Location: ' . URL . "accueil");
     }
@@ -51,6 +53,27 @@ class CommentatorController extends MainController
             "template" => "views/common/admin.template.php"
         ];
         $this->generatePage($data_page);
+    }
+
+    public function resendMailValidation($mail)
+    {
+        $userData = $this->commentatorManager->getUserData($mail);
+        $validationUrl = URL . "validationMail/" . $userData['username'] . "/" . $userData['linkValid'];
+        $subject = "Création de compte sur " . URL;
+        $content = " Veuillez cliquer sur le liens pour valider votre compte : " . $validationUrl;
+        Toolbox::sendMail($mail, $subject, $content);
+        header('Location: ' . URL . "login");
+    }
+
+    public function validationMail($username, $key)
+    {
+        if ($this->commentatorManager->setValidAccount($username, $key)) {
+            Toolbox::ajouterMessageAlerte("Votre compte a été validé", Toolbox::COULEUR_VERTE);
+            header('Location: ' . URL . "login");
+        } else {
+            Toolbox::ajouterMessageAlerte("Votre compte n'a pas pu être validé", Toolbox::COULEUR_ROUGE);
+            header('Location: ' . URL . "register");
+        }
     }
     public function ErrorPage($msg): void
     {
