@@ -3,7 +3,7 @@
         <div class="logo">
             <img src="https://via.placeholder.com/150" />
         </div>
-        <h2>Admin</h2>
+        <h2>Backoffice</h2>
         <button type="button" class="btn-close" aria-label="Close"></button>
     </div>
     <div class="sidebar">

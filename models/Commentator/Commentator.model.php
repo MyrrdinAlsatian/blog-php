@@ -56,4 +56,35 @@ class CommentatorManager extends MainManager
         $req->closeCursor();
         return $validated;
     }
+
+    public function setNewMail($mail, $username)
+    {
+        $req = $this->getBdd()->prepare('UPDATE user SET email = :mail WHERE username = :username');
+        $req->bindValue(':username', $username, PDO::PARAM_STR);
+        $req->bindValue(':mail', $mail, PDO::PARAM_STR);
+        $req->execute();
+        $validated = ($req->rowCount() > 0);
+        $req->closeCursor();
+        return $validated;
+    }
+    public function setNewPassword($password, $mail)
+    {
+        $req = $this->getBdd()->prepare('UPDATE user SET password = :password WHERE email = :email');
+        $req->bindValue(':password', $password, PDO::PARAM_STR);
+        $req->bindValue(':email', $mail, PDO::PARAM_STR);
+        $req->execute();
+        $validated = ($req->rowCount() > 0);
+        $req->closeCursor();
+        return $validated;
+    }
+
+    public function removeAccount($mail)
+    {
+        $req = $this->getBdd()->prepare('DELETE user FROM user WHERE email = :email');
+        $req->bindValue(':email', $mail, PDO::PARAM_STR);
+        $req->execute();
+        $validated = ($req->rowCount() > 0);
+        $req->closeCursor();
+        return $validated;
+    }
 }

@@ -76,11 +76,44 @@ try {
                     case 'profile':
                         $userController->profile();
                         break;
+                    case 'validation_mailModification':
+                        $userController->validationMailModification(Security::emailSafe($_POST["mail"]));
+                        break;
+                    case 'passwordModification':
+                        $userController->passwordModification();
+                        break;
+                    case 'validation_newPassword':
+                        if (
+                            !empty($_POST["newPassword"]) &&
+                            !empty($_POST["confirmPassword"]) &&
+                            !empty($_POST["oldPassword"])
+                        ) {
+
+                            if ($_POST['newPassword'] !== $_POST['confirmPassword']) {
+                                Toolbox::ajouterMessageAlerte("Veuillez re-confirmer votre mot de passe", Toolbox::COULEUR_ROUGE);
+                                header('Location: ' . URL . "backoffice/passwordModification");
+                            } else {
+
+                                $oldPassword = Security::htmlSafe($_POST["oldPassword"]);
+                                $newPassword = Security::htmlSafe($_POST["newPassword"]);
+
+                                $userController->validationNewPassword($oldPassword, $newPassword);
+                            }
+                        } else {
+                            Toolbox::ajouterMessageAlerte("Veuillez compléter tous les champs du formulaire", Toolbox::COULEUR_ROUGE);
+                            header('Location: ' . URL . "backoffice/passwordModification");
+                        }
+
+                        break;
+
+                    case "deleteAccount":
+                        $userController->deleteAccount();
+                        break;
                     default:
                         throw new Exception("ce profile n'existe pas");
                 }
             } else {
-                Toolbox::ajouterMessageAlerte("Veuillez vous connectez !!", Toolbox::COULEUR_ROUGE);
+                Toolbox::ajouterMessageAlerte("Veuillez vous connecter !!", Toolbox::COULEUR_ROUGE);
                 header('Location: ' . URL . "login");
             }
             break;
