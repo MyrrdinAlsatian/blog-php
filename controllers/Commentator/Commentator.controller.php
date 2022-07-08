@@ -69,7 +69,7 @@ class CommentatorController extends MainController
     {
         if ($this->commentatorManager->setValidAccount($username, $key)) {
             Toolbox::ajouterMessageAlerte("Votre compte a été validé", Toolbox::COULEUR_VERTE);
-            header('Location: ' . URL . "backoffice/profile");
+            header('Location: ' . URL . "login");
         } else {
             Toolbox::ajouterMessageAlerte("Votre compte n'a pas pu être validé", Toolbox::COULEUR_ROUGE);
             header('Location: ' . URL . "register");
