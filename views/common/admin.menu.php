@@ -19,18 +19,19 @@
             <span class="material-icons-sharp"> person_outline </span>
             <h3>Profile</h3>
         </a>
-        <a href="<?= URL ?>backoffice/profile" rel="noopener noreferrer" class="d-flex align-items-center text-center">
-            <span class="material-icons-sharp"> account_circle </span>
-            <h3>Users</h3>
-        </a>
-        <a href="<?= URL ?>backoffice/article" rel="noopener noreferrer" class="d-flex align-items-center text-center">
-            <span class="material-icons-sharp"> article </span>
-            <h3>Article</h3>
-        </a>
-        <a href="<?= URL ?>backoffice/tags" rel="noopener noreferrer" class="d-flex align-items-center text-center">
-            <span class="material-icons-sharp"> tag </span>
-            <h3>Tag</h3>
-        </a>
+        <?php if (Security::isAdmin()) : ?>
+            <a href="<?= URL ?>backoffice/profile" rel="noopener noreferrer" class="d-flex align-items-center text-center">
+                <span class="material-icons-sharp"> account_circle </span>
+                <h3>Users</h3>
+            </a>
+            <a href="<?= URL ?>backoffice/article" rel="noopener noreferrer" class="d-flex align-items-center text-center">
+                <span class="material-icons-sharp"> article </span>
+                <h3>Article</h3>
+            </a>
+        <?php
+        endif;
+        ?>
+
         <a href="<?= URL ?>backoffice/comment" rel="noopener noreferrer" class="d-flex align-items-center text-center">
             <span class="material-icons-sharp"> comment_bank </span>
             <h3>Comment</h3>
