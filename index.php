@@ -76,6 +76,12 @@ try {
                     case 'profile':
                         $userController->profile();
                         break;
+                    case 'validation_mailModification':
+                        $userController->validationMailModification(Security::emailSafe($_POST["mail"]));
+                        break;
+                    case 'passwordModification':
+                        $userController->passwordModification();
+                        break;
                     default:
                         throw new Exception("ce profile n'existe pas");
                 }

@@ -56,4 +56,15 @@ class CommentatorManager extends MainManager
         $req->closeCursor();
         return $validated;
     }
+
+    public function setNewMail($mail, $username)
+    {
+        $req = $this->getBdd()->prepare('UPDATE user SET email = :mail WHERE username = :username');
+        $req->bindValue(':username', $username, PDO::PARAM_STR);
+        $req->bindValue(':mail', $mail, PDO::PARAM_STR);
+        $req->execute();
+        $validated = ($req->rowCount() > 0);
+        $req->closeCursor();
+        return $validated;
+    }
 }
