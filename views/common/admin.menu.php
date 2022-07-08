@@ -20,7 +20,7 @@
             <h3>Profile</h3>
         </a>
         <?php if (Security::isAdmin()) : ?>
-            <a href="<?= URL ?>backoffice/profile" rel="noopener noreferrer" class="d-flex align-items-center text-center">
+            <a href="<?= URL ?>backoffice/users" rel="noopener noreferrer" class="d-flex align-items-center text-center">
                 <span class="material-icons-sharp"> account_circle </span>
                 <h3>Users</h3>
             </a>
