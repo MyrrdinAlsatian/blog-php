@@ -19,10 +19,10 @@ class Security
     }
     public static function isAdmin(): bool
     {
-        return ($_SESSION['profile']['role'] === '2');
+        return ($_SESSION['profile']['role'] === 2);
     }
     public static function isUser(): bool
     {
-        return ($_SESSION['profile']['role'] === '1');
+        return ($_SESSION['profile']['role'] === 1);
     }
 }
