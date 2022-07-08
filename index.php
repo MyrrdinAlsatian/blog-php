@@ -10,11 +10,13 @@ define("URL", str_replace("index.php", "", (isset($_SERVER['HTTPS']) ? "https" :
 
 require_once('./controllers/Visitor/Visitor.controller.php');
 require_once('./controllers/Commentator/Commentator.controller.php');
+require_once('./controllers/Admin/Admin.controller.php');
 require_once("./controllers/Toolbox.class.php");
 require_once("./controllers/Secutity.class.php");
 
 $visitorController = new VisitorController();
 $userController = new CommentatorController();
+$adminController = new AdminController();
 
 try {
     if (empty($_GET['page'])) {
@@ -108,6 +110,33 @@ try {
 
                     case "deleteAccount":
                         $userController->deleteAccount();
+                        break;
+                    case "users":
+                        if (Security::isAdmin()) {
+                            $adminController->listUsers();
+                        } elseif (Security::isUser()) {
+                            Toolbox::ajouterMessageAlerte("Vous n'avez pas accès a cette page", Toolbox::COULEUR_ORANGE);
+                            header('Location: ' . URL . "/backoffice/profile");
+                        } else {
+                            Toolbox::ajouterMessageAlerte("Vous n'avez pas accès a cette page", Toolbox::COULEUR_ORANGE);
+                            header('Location: ' . URL . "/");
+                        }
+                        break;
+                    case "validation_RoleModification":
+                        if (!empty($_POST['role']) && !empty($_POST['id'])) {
+                            $id = (int)$_POST['id'];
+                            $role = Security::htmlSafe($_POST["role"]);
+                            $adminController->validateRoleModification($id, $role);
+                        } else {
+                            Toolbox::ajouterMessageAlerte("Vous ne pouvez pas modifié", Toolbox::COULEUR_ORANGE);
+                            header('Location: ' . URL . "backoffice/users");
+                        }
+                        break;
+                    case "admin_deleteUser":
+                        if (!empty($_POST['id'])) {
+                            $id = (int)$_POST['id'];
+                            $adminController->deleteUser($id);
+                        }
                         break;
                     default:
                         throw new Exception("ce profile n'existe pas");

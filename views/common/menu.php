@@ -13,7 +13,7 @@
             </li>
         </ul>
         <?php
-        if (empty($_SESSION["profile"])) : ?>
+        if (!Security::isConnected()) : ?>
             <a type="button" class="btn--custom btn-primary--custom" href="<?= URL ?>login">Login</a>
         <?php else : ?>
             <a type="button" class="btn--custom btn-primary--custom" href="<?= URL ?>backoffice\profile">Mon Compte</a>
