@@ -77,4 +77,14 @@ class CommentatorManager extends MainManager
         $req->closeCursor();
         return $validated;
     }
+
+    public function removeAccount($mail)
+    {
+        $req = $this->getBdd()->prepare('DELETE user FROM user WHERE email = :email');
+        $req->bindValue(':email', $mail, PDO::PARAM_STR);
+        $req->execute();
+        $validated = ($req->rowCount() > 0);
+        $req->closeCursor();
+        return $validated;
+    }
 }

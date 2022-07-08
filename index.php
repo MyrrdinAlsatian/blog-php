@@ -105,11 +105,15 @@ try {
                         }
 
                         break;
+
+                    case "deleteAccount":
+                        $userController->deleteAccount();
+                        break;
                     default:
                         throw new Exception("ce profile n'existe pas");
                 }
             } else {
-                Toolbox::ajouterMessageAlerte("Veuillez vous connectez !!", Toolbox::COULEUR_ROUGE);
+                Toolbox::ajouterMessageAlerte("Veuillez vous connecter !!", Toolbox::COULEUR_ROUGE);
                 header('Location: ' . URL . "login");
             }
             break;

@@ -115,6 +115,18 @@ class CommentatorController extends MainController
             header('Location: ' . URL . "backoffice/passwordModification");
         }
     }
+
+    public function deleteAccount()
+    {
+
+        if ($this->commentatorManager->removeAccount($_SESSION['profile']['mail'])) {
+            Toolbox::ajouterMessageAlerte("Votre compte à bien été supprmier", Toolbox::COULEUR_VERTE);
+            $this->logout();
+        } else {
+            Toolbox::ajouterMessageAlerte("Impossible de supprimer ce compte, veuillez contacter l'administrateur", Toolbox::COULEUR_ROUGE);
+            header('Location: ' . URL . "backoffice/profile");
+        }
+    }
     public function ErrorPage($msg): void
     {
         parent::ErrorPage($msg);
