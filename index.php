@@ -16,7 +16,7 @@ require_once("./controllers/Secutity.class.php");
 
 $visitorController = new VisitorController();
 $userController = new CommentatorController();
-$adminControler = new AdminController();
+$adminController = new AdminController();
 
 try {
     if (empty($_GET['page'])) {
@@ -113,13 +113,29 @@ try {
                         break;
                     case "users":
                         if (Security::isAdmin()) {
-                            $adminControler->listUsers();
+                            $adminController->listUsers();
                         } elseif (Security::isUser()) {
                             Toolbox::ajouterMessageAlerte("Vous n'avez pas accès a cette page", Toolbox::COULEUR_ORANGE);
                             header('Location: ' . URL . "/backoffice/profile");
                         } else {
                             Toolbox::ajouterMessageAlerte("Vous n'avez pas accès a cette page", Toolbox::COULEUR_ORANGE);
                             header('Location: ' . URL . "/");
+                        }
+                        break;
+                    case "validation_RoleModification":
+                        if (!empty($_POST['role']) && !empty($_POST['id'])) {
+                            $id = (int)$_POST['id'];
+                            $role = Security::htmlSafe($_POST["role"]);
+                            $adminController->validateRoleModification($id, $role);
+                        } else {
+                            Toolbox::ajouterMessageAlerte("Vous ne pouvez pas modifié", Toolbox::COULEUR_ORANGE);
+                            header('Location: ' . URL . "backoffice/users");
+                        }
+                        break;
+                    case "admin_deleteUser":
+                        if (!empty($_POST['id'])) {
+                            $id = (int)$_POST['id'];
+                            $adminController->deleteUser($id);
                         }
                         break;
                     default:
