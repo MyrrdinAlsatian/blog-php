@@ -138,6 +138,9 @@ try {
                             $adminController->deleteUser($id);
                         }
                         break;
+                    case "articles":
+                        $adminController->articles();
+                        break;
                     default:
                         throw new Exception("ce profile n'existe pas");
                 }

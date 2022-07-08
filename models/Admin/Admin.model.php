@@ -34,4 +34,13 @@ class AdminManager extends MainManager
         $req->closeCursor();
         return $validated;
     }
+
+    public function getAllArticles()
+    {
+        $req = $this->getBdd()->prepare('SELECT a.id, a.title, a.status, a.created, u.username FROM user u INNER JOIN article a ON a.user_id = u.id');
+        $req->execute();
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+        $req->closeCursor();
+        return $data;
+    }
 }

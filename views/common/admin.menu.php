@@ -24,7 +24,7 @@
                 <span class="material-icons-sharp"> account_circle </span>
                 <h3>Users</h3>
             </a>
-            <a href="<?= URL ?>backoffice/article" rel="noopener noreferrer" class="d-flex align-items-center text-center">
+            <a href="<?= URL ?>backoffice/articles" rel="noopener noreferrer" class="d-flex align-items-center text-center">
                 <span class="material-icons-sharp"> article </span>
                 <h3>Article</h3>
             </a>
