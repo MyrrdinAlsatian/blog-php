@@ -45,8 +45,8 @@
                 <div class="profile">
                     <div class="info">
                         <p>
-                            Hey, <b><?= $user['username'] ?></b>
-                            <small class="text-muted"><?= Toolbox::displayRole($user['role']) ?></small>
+                            Hey, <b><?= $_SESSION['profile']['username'] ?></b>
+                            <small class="text-muted"><?= Toolbox::displayRole($_SESSION['profile']['role']) ?></small>
                         </p>
                     </div>
                 </div>
