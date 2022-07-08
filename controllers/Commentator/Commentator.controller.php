@@ -93,7 +93,7 @@ class CommentatorController extends MainController
         $data_page = [
             "page_description" => "Changer son mot de passe",
             "page_title" => "Modification du mot de passe",
-            // "page_javascript" => ["profile.js"],
+            "page_javascript" => ["passwordModif.js"],
             'view' => "views/Commentator/modificationPassword.view.php",
             "template" => "views/common/admin.template.php"
         ];
