@@ -28,8 +28,15 @@
     </form>
 </div>
 
-<div>
+<div class="">
     <a href="<?= URL ?>backoffice/passwordModification" class="btn btn-warning btn-xs"> Modifier mon mot de passe</a>
+    <button class="btn btn-danger btn-xs" id="deleteAccount"> Supprimer mon compte </button>
+</div>
+<div id="confirmDeleteAccount" class=" d-none mb-2">
+    <div class="alert alert-danger">
+        Veuillez confirmer la suppression de votre compte, ceci est définitif ! </br>
+        <a href="<?= URL ?>backoffice/deleteAccount" class="btn btn-danger btn-xs">Je confirme vouloir supprimer mon compte</a>
+    </div>
 </div>
 <?php
 

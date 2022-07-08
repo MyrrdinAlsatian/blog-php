@@ -1,18 +1,18 @@
-const newPassword = document.querySelector('#newPassword');
-const confirmPassword = document.querySelector('#confirmPassword');
-const confirmBtn = document.querySelector('#sendNewPassword');
+const NEWPASSWORD = document.querySelector('#newPassword');
+const CONFIRMPASSWORD = document.querySelector('#confirmPassword');
+const CONFIRMBTN = document.querySelector('#sendNewPassword');
 
 const verifyPassword = () => {
-    if (newPassword.value === confirmPassword.value) {
-        confirmBtn.disabled = false;
+    if (NEWPASSWORD.value === CONFIRMPASSWORD.value) {
+        CONFIRMBTN.disabled = false;
         document.querySelector('#alert').classList.add('d-none');
     } else {
-        confirmBtn.disabled = true;
+        CONFIRMBTN.disabled = true;
         document.querySelector('#alert').classList.remove('d-none');
     }
 };
 
-newPassword.addEventListener('keyup', verifyPassword);
+NEWPASSWORD.addEventListener('keyup', verifyPassword);
 
-confirmPassword.addEventListener('keyup', verifyPassword);
+CONFIRMPASSWORD.addEventListener('keyup', verifyPassword);
 

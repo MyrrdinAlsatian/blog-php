@@ -1,13 +1,17 @@
-console.warn('Error loading');
+const BTNMAILMODIF = document.getElementById('MailModification');
+const BTNSUBMITMAILMODIF = document.getElementById('submitMail');
+const BTNDELETEACCOUNT = document.getElementById('deleteAccount');
 
-let btnMailModif = document.getElementById('MailModification');
-let btnSubmitMailModif = document.getElementById('submitMail');
+const MAILMODIFICATIONFORM = document.getElementById('ModificationMail');
+const MAILDIV = document.getElementById('Mail');
+const CONFIRMDELETEACCOUNT = document.getElementById('confirmDeleteAccount');
 
-let MailModificationForm = document.getElementById('ModificationMail');
-let MailDiv = document.getElementById('Mail');
+BTNMAILMODIF.addEventListener('click', () => {
+    MAILDIV.classList.toggle('d-none');
+    MAILMODIFICATIONFORM.classList.toggle('d-none');
+});
 
-btnMailModif.addEventListener('click', () => {
-    MailDiv.classList.toggle('d-none');
-    MailModificationForm.classList.toggle('d-none');
+BTNDELETEACCOUNT.addEventListener('click', () => {
+    CONFIRMDELETEACCOUNT.classList.remove('d-none');
 });
 
