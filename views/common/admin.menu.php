@@ -7,13 +7,13 @@
         <button type="button" class="btn-close" aria-label="Close"></button>
     </div>
     <div class="sidebar">
-        <a href="<?= URL ?>backoffice" rel="noopener noreferrer" class="d-flex align-items-center text-center">
-            <span class="material-icons-sharp"> grid_view </span>
-            <h3>Dashboard</h3>
-        </a>
         <a href="<?= URL ?>" rel="noopener noreferrer" class="d-flex align-items-center text-center">
             <span class="material-icons-sharp"> home </span>
             <h3>Home</h3>
+        </a>
+        <a href="<?= URL ?>backoffice" rel="noopener noreferrer" class="d-flex align-items-center text-center">
+            <span class="material-icons-sharp"> grid_view </span>
+            <h3>Dashboard</h3>
         </a>
         <a href="<?= URL ?>backoffice/profile" rel="noopener noreferrer" class="d-flex align-items-center text-center">
             <span class="material-icons-sharp"> person_outline </span>
