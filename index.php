@@ -138,6 +138,9 @@ try {
                             $adminController->deleteUser($id);
                         }
                         break;
+                    case "new_article":
+                        $adminController->newArticle();
+                        break;
                     case "articles":
                         $adminController->articles();
                         break;
