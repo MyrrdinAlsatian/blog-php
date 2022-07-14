@@ -63,6 +63,29 @@ class AdminController extends MainController
         $this->generatePage($data_page);
     }
 
+    public function newArticle()
+    {
+        $articlesData = $this->adminManager->getAllArticles();
+        $data_page = [
+            "page_description" => " Blog OpenClassroom",
+            "page_title" => "Backoffice listing des articles",
+            // "page_javascript" => ["profile.js"],
+            'view' => "views/Admin/newArticle.view.php",
+            "template" => "views/common/admin.template.php"
+        ];
+        $this->generatePage($data_page);
+    }
+    public function validateArticle($title, $subtitle, $status, $content, $readTime, $imgPath, $user)
+    {
+        if ($this->adminManager->setArticle($title, $subtitle, $status, $content, $readTime, $imgPath, $user)) {
+            Toolbox::ajouterMessageAlerte('L\'article' . $title . 'à été ajouté', Toolbox::COULEUR_VERTE);
+            header('Location: ' . URL . 'backoffice/articles');
+        } else {
+            Toolbox::ajouterMessageAlerte('L\'article' . $title . 'à été ajouté', Toolbox::COULEUR_VERTE);
+            header('Location: ' . URL . 'backoffice/articles');
+        }
+    }
+
     public function ErrorPage($msg): void
     {
         parent::ErrorPage($msg);

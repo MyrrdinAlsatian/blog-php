@@ -24,9 +24,14 @@
                 <span class="material-icons-sharp"> account_circle </span>
                 <h3>Users</h3>
             </a>
+            <a href="<?= URL ?>backoffice/new_article" rel="noopener noreferrer" class="d-flex align-items-center text-center">
+                <span class="material-icons-sharp"> brush </span>
+                <h3>Nouvelle article</h3>
+            </a>
+
             <a href="<?= URL ?>backoffice/articles" rel="noopener noreferrer" class="d-flex align-items-center text-center">
                 <span class="material-icons-sharp"> article </span>
-                <h3>Article</h3>
+                <h3>Articles</h3>
             </a>
         <?php
         endif;
