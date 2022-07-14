@@ -138,6 +138,35 @@ try {
                             $adminController->deleteUser($id);
                         }
                         break;
+                    case "new_article":
+                        $adminController->newArticle();
+                        break;
+                    case "validation_newArticle":
+
+                        if (
+                            !empty($_POST['title']) &&
+                            !empty($_POST['subTitle']) &&
+                            !empty($_POST['readingTime']) &&
+                            isset($_POST['status']) &&
+                            !empty($_POST['user']) &&
+                            !empty($_POST['content']) &&
+                            !empty($_FILES["image"])
+                        ) {
+                            $title = Security::htmlSafe((string)$_POST['title']);
+                            $subTitle = Security::htmlSafe((string)$_POST['subTitle']);
+                            $status = Security::htmlSafe((int)$_POST['status']);
+                            $readTime = Security::htmlSafe($_POST['readingTime']);
+                            $imagePath = "./public/upload/" . Security::htmlSafe($_FILES["image"]['name']);
+                            $content = Security::htmlSafe($_POST["content"]);
+                            $user = Security::htmlSafe($_POST["user"]);
+
+                            $adminController->validateArticle($title, $subTitle, $status, $content, $readTime, $imagePath, $user);
+                            move_uploaded_file($_FILES["image"]["tmp_name"], $imagePath);
+                        } else {
+                            Toolbox::ajouterMessageAlerte("Erreur :", Toolbox::COULEUR_ROUGE);
+                            header('Location: ' . URL . 'backoffice/new_article');
+                        }
+                        break;
                     case "articles":
                         $adminController->articles();
                         break;

@@ -43,9 +43,9 @@ class CommentatorController extends MainController
     public function profile()
     {
         $userData = $this->commentatorManager->getUserData($_SESSION["profile"]['mail']);
-        print_r($userData);
         $_SESSION['profile']['role'] = $userData['role'];
         $_SESSION['profile']['username'] = $userData['username'];
+        $_SESSION['profile']['id'] = $userData['id'];
         $data_page = [
             "page_description" => " Blog OpenClassroom",
             "page_title" => "Profile de " . $_SESSION["profile"]['mail'] . "",
