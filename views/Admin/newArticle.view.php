@@ -1,5 +1,5 @@
 <h1> Nouvelle article de <?= $_SESSION["profile"]["username"]; ?></h1>
-<form method="post" action="<?= URL . "backoffice/validation_newArticle" ?>">
+<form method="post" enctype="multipart/form-data" action="<?= URL . "backoffice/validation_newArticle" ?>">
 
     <div class="mb-3">
         <label for="title" class="form-label">
@@ -51,6 +51,6 @@
             veuillez écrire le même mot de passe
         </div>
     </div>-->
-    <input type="hidden" name="user" id="user" value="<?= $_SESSION["profile"]["username"]; ?>" />
-    <button id='sendNewArticle' type="submit" class="btn btn-success" disabled> Confirmer </button>
+    <input type="hidden" name="user" id="user" value="<?= $_SESSION["profile"]["id"]; ?>" />
+    <button id='sendNewArticle' type="submit" class="btn btn-success"> Confirmer </button>
 </form>

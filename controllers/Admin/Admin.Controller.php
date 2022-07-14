@@ -75,6 +75,16 @@ class AdminController extends MainController
         ];
         $this->generatePage($data_page);
     }
+    public function validateArticle($title, $subtitle, $status, $content, $readTime, $imgPath, $user)
+    {
+        if ($this->adminManager->setArticle($title, $subtitle, $status, $content, $readTime, $imgPath, $user)) {
+            Toolbox::ajouterMessageAlerte('L\'article' . $title . 'à été ajouté', Toolbox::COULEUR_VERTE);
+            header('Location: ' . URL . 'backoffice/articles');
+        } else {
+            Toolbox::ajouterMessageAlerte('L\'article' . $title . 'à été ajouté', Toolbox::COULEUR_VERTE);
+            header('Location: ' . URL . 'backoffice/articles');
+        }
+    }
 
     public function ErrorPage($msg): void
     {

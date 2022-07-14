@@ -34,6 +34,21 @@ class AdminManager extends MainManager
         $req->closeCursor();
         return $validated;
     }
+    public function setArticle($title, $subtitle, $status, $content, $readTime, $imgPath, $user)
+    {
+        $req = $this->getBdd()->prepare('INSERT INTO article (title, chapo, status, content, featureImage, readingTime , user_id) VALUES (:title, :subtitle, :status, :content, :imgPath, :readTime , :user)');
+        $req->bindValue(':title', $title, PDO::PARAM_STR);
+        $req->bindValue(':subtitle', $subtitle, PDO::PARAM_STR);
+        $req->bindValue(':status', $status, PDO::PARAM_INT);
+        $req->bindValue(':content', $content, PDO::PARAM_STR);
+        $req->bindValue(':readTime', $readTime, PDO::PARAM_STR);
+        $req->bindValue(':user', $user, PDO::PARAM_INT);
+        $req->bindValue(':imgPath', $imgPath, PDO::PARAM_STR);
+        $req->execute();
+        $isDone = ($req->rowCount() == 1);
+        $req->closeCursor();
+        return $isDone;
+    }
 
     public function getAllArticles()
     {
