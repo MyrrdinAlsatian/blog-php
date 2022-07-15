@@ -1061,6 +1061,8 @@ body {
   width: 100%;
   background: #2c2b3b;
   position: relative;
+  aspect-ratio: 1.5 / 1;
+  object-fit: cover;
 }
 .blogs-bloc__item header {
   margin: 17px 12px;
