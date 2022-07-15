@@ -14,7 +14,7 @@ class VisitorController extends MainController
 
     public  function accueil()
     {
-        $articles = $this->visitorManager->getArticles();
+        $articles = $this->visitorManager->getLastArticles();
         $data_page = [
             "page_description" => " Blog OpenClassroom",
             "page_title" => "Blog jb",
@@ -49,7 +49,6 @@ class VisitorController extends MainController
 
     public function validation_register($mail, $pseudo, $password)
     {
-        echo "Register validation";
         if ($this->visitorManager->isPseudoAvailable($pseudo)) {
             if ($this->visitorManager->isMailAvailable($mail)) {
                 $passwordEncrypted = password_hash($password, PASSWORD_DEFAULT);
@@ -77,6 +76,19 @@ class VisitorController extends MainController
         $subject = "Création de compte sur " . URL;
         $content = " Veuillez cliquer sur le liens pour valider votre compte : " . $validationUrl;
         Toolbox::sendMail($mail, $subject, $content);
+    }
+
+    public function articles()
+    {
+        $articles = $this->visitorManager->getArticles();
+        $data_page = [
+            "page_description" => " Blog OpenClassroom",
+            "page_title" => "Articles du blog jb",
+            "page_data" => $articles,
+            'view' => "views/blog.view.php",
+            "template" => "views/common/template.php"
+        ];
+        $this->generatePage($data_page);
     }
 
     public function ErrorPage($msg): void

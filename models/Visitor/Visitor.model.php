@@ -6,7 +6,15 @@ class VisitorManager extends MainManager
 {
     public function getArticles()
     {
-        $req = $this->getBdd()->prepare('SELECT * FROM article');
+        $req = $this->getBdd()->prepare('SELECT * FROM article WHERE status = 1 ORDER BY id DESC');
+        $req->execute();
+        $datas = $req->fetchAll(PDO::FETCH_ASSOC);
+        $req->closeCursor();
+        return $datas;
+    }
+    public function getLastArticles()
+    {
+        $req = $this->getBdd()->prepare('SELECT * FROM article WHERE status = 1  ORDER BY id DESC LIMIT 3 ');
         $req->execute();
         $datas = $req->fetchAll(PDO::FETCH_ASSOC);
         $req->closeCursor();
