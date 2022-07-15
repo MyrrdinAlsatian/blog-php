@@ -34,6 +34,15 @@ class AdminManager extends MainManager
         $req->closeCursor();
         return $validated;
     }
+    public function unsetArticle($id)
+    {
+        $req = $this->getBdd()->prepare('DELETE article FROM article WHERE id = :id ');
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->execute();
+        $validated = ($req->rowCount() == 1);
+        $req->closeCursor();
+        return $validated;
+    }
     public function setArticle($title, $subtitle, $status, $content, $readTime, $imgPath, $user)
     {
         $req = $this->getBdd()->prepare('INSERT INTO article (title, chapo, status, content, featureImage, readingTime , user_id) VALUES (:title, :subtitle, :status, :content, :imgPath, :readTime , :user)');

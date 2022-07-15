@@ -81,7 +81,18 @@ class AdminController extends MainController
             Toolbox::ajouterMessageAlerte('L\'article' . $title . 'à été ajouté', Toolbox::COULEUR_VERTE);
             header('Location: ' . URL . 'backoffice/articles');
         } else {
-            Toolbox::ajouterMessageAlerte('L\'article' . $title . 'à été ajouté', Toolbox::COULEUR_VERTE);
+            Toolbox::ajouterMessageAlerte('Aucun article n\'a été ajouté', Toolbox::COULEUR_ORANGE);
+            header('Location: ' . URL . 'backoffice/articles');
+        }
+    }
+
+    public function deleteArticle($id, $title)
+    {
+        if ($this->adminManager->unsetArticle($id)) {
+            Toolbox::ajouterMessageAlerte('L\'article' . $title . 'à été supprimer', Toolbox::COULEUR_VERTE);
+            header('Location: ' . URL . 'backoffice/articles');
+        } else {
+            Toolbox::ajouterMessageAlerte('L\'article' . $title . 'n\'à pas été supprimer', Toolbox::COULEUR_ORANGE);
             header('Location: ' . URL . 'backoffice/articles');
         }
     }

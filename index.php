@@ -111,6 +111,11 @@ try {
                     case "deleteAccount":
                         $userController->deleteAccount();
                         break;
+                    case "deleteArticle":
+                        $title = Security::htmlSafe($_POST["title"]);
+                        $id = Security::htmlSafe($_POST["id"]);
+                        $adminController->deleteArticle($id, $title);
+                        break;
                     case "users":
                         if (Security::isAdmin()) {
                             $adminController->listUsers();
