@@ -49,6 +49,16 @@ try {
         case "register":
             $visitorController->register();
             break;
+        case 'articles':
+            $visitorController->articles();
+            break;
+        case 'article':
+            if ($url[2] == 'edit') {
+                $adminController->updateArticle($url[1]);
+            } else {
+                $visitorController->article($url[1]);
+            }
+            break;
         case 'validation_register':
             if (!empty($_POST["mail"] && !empty($_POST["password"])) && !empty($_POST['pseudo']) && !empty($_POST['confirmpassword'])) {
                 if ($_POST['confirmpassword'] !== $_POST['password']) {
@@ -71,6 +81,88 @@ try {
             break;
         case 'validationMail':
             $userController->validationMail($url[1], $url[2]);
+            break;
+        case 'validate_articleTitleModification':
+            if (Security::isAdmin()) {
+                if (
+                    !empty($_POST['title']) &&
+                    !empty($_POST['id'])
+                ) {
+                    $title = Security::htmlSafe((string)$_POST['title']);
+                    $id = Security::numberSafe($_POST["id"]);
+
+                    $adminController->articleTitleModification($id, $title);
+                }
+            } else {
+                Toolbox::ajouterMessageAlerte('Vous ne pouvez pas accèder à cette page.', Toolbox::COULEUR_ROUGE);
+                header('Location: ' . URL);
+            }
+            break;
+        case 'validate_articleChapoModification':
+            if (Security::isAdmin()) {
+                if (
+                    !empty($_POST['chapo']) &&
+                    !empty($_POST['id'])
+                ) {
+                    $chapo = Security::htmlSafe((string)$_POST['chapo']);
+                    $id = Security::numberSafe($_POST["id"]);
+
+                    $adminController->articleChapoModification($id, $chapo);
+                }
+            } else {
+                Toolbox::ajouterMessageAlerte('Vous ne pouvez pas accèder à cette page.', Toolbox::COULEUR_ROUGE);
+                header('Location: ' . URL);
+            }
+            break;
+        case 'validate_articleContentModification':
+            if (Security::isAdmin()) {
+                if (
+                    !empty($_POST['content']) &&
+                    !empty($_POST['id'])
+                ) {
+                    $content = Security::htmlSafe((string)$_POST['content']);
+                    $id = Security::numberSafe($_POST["id"]);
+
+                    $adminController->articleContentModification($id, $content);
+                }
+            } else {
+                Toolbox::ajouterMessageAlerte('Vous ne pouvez pas accèder à cette page.', Toolbox::COULEUR_ROUGE);
+                header('Location: ' . URL);
+            }
+            break;
+        case 'validate_articleImgModification':
+            if (Security::isAdmin()) {
+                if (
+                    isset($_FILES["img"]) &&
+                    !empty($_POST['id'])
+                ) {
+                    $id = Security::numberSafe($_POST["id"]);
+                    $imagePath = "./public/upload/" . Security::urlSafe($_FILES["img"]['name']);
+
+                    $adminController->articleImgModification($id, $imagePath);
+                    move_uploaded_file($_FILES["img"]["tmp_name"], $imagePath);
+                }
+            } else {
+                Toolbox::ajouterMessageAlerte('Vous ne pouvez pas accèder à cette page.', Toolbox::COULEUR_ROUGE);
+                header('Location: ' . URL);
+            }
+            break;
+        case 'validate_articleTimeModification':
+            if (Security::isAdmin()) {
+                if (
+                    !empty($_POST['readingTime']) &&
+                    !empty($_POST['id'])
+                ) {
+                    $id = Security::numberSafe($_POST["id"]);
+                    $time = Security::numberSafe($_POST["readingTime"]);
+
+                    $adminController->articleTimeModification($id, $time);
+                }
+            } else {
+                Toolbox::ajouterMessageAlerte('Vous ne pouvez pas accèder à cette page.', Toolbox::COULEUR_ROUGE);
+                header('Location: ' . URL);
+            }
+
             break;
         case 'backoffice':
             if (Security::isConnected()) {
@@ -110,6 +202,11 @@ try {
 
                     case "deleteAccount":
                         $userController->deleteAccount();
+                        break;
+                    case "deleteArticle":
+                        $title = Security::htmlSafe($_POST["title"]);
+                        $id = Security::htmlSafe($_POST["id"]);
+                        $adminController->deleteArticle($id, $title);
                         break;
                     case "users":
                         if (Security::isAdmin()) {
@@ -155,7 +252,7 @@ try {
                             $title = Security::htmlSafe((string)$_POST['title']);
                             $subTitle = Security::htmlSafe((string)$_POST['subTitle']);
                             $status = Security::htmlSafe((int)$_POST['status']);
-                            $readTime = Security::htmlSafe($_POST['readingTime']);
+                            $readTime = $_POST['readingTime'];
                             $imagePath = "./public/upload/" . Security::htmlSafe($_FILES["image"]['name']);
                             $content = Security::htmlSafe($_POST["content"]);
                             $user = Security::htmlSafe($_POST["user"]);
@@ -169,6 +266,9 @@ try {
                         break;
                     case "articles":
                         $adminController->articles();
+                        break;
+                    case "update_status_articles":
+                        $adminController->updateStatus((int)Security::htmlSafe($_POST["id"]), (int)Security::htmlSafe($_POST["status"]));
                         break;
                     default:
                         throw new Exception("ce profile n'existe pas");
