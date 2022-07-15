@@ -90,6 +90,18 @@ class VisitorController extends MainController
         ];
         $this->generatePage($data_page);
     }
+    public function article($id)
+    {
+        $article = $this->visitorManager->getArticle($id);
+        $data_page = [
+            "page_description" => " Blog OpenClassroom",
+            "page_title" => "Articles du blog jb",
+            "page_data" => $article,
+            'view' => "views/Visitor/blogItem.view.php",
+            "template" => "views/common/template.php"
+        ];
+        $this->generatePage($data_page);
+    }
 
     public function ErrorPage($msg): void
     {

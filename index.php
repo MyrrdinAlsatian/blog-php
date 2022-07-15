@@ -49,6 +49,12 @@ try {
         case "register":
             $visitorController->register();
             break;
+        case 'articles':
+            $visitorController->articles();
+            break;
+        case 'article':
+            $visitorController->article($url[1]);
+            break;
         case 'validation_register':
             if (!empty($_POST["mail"] && !empty($_POST["password"])) && !empty($_POST['pseudo']) && !empty($_POST['confirmpassword'])) {
                 if ($_POST['confirmpassword'] !== $_POST['password']) {
@@ -160,7 +166,7 @@ try {
                             $title = Security::htmlSafe((string)$_POST['title']);
                             $subTitle = Security::htmlSafe((string)$_POST['subTitle']);
                             $status = Security::htmlSafe((int)$_POST['status']);
-                            $readTime = Security::htmlSafe($_POST['readingTime']);
+                            $readTime = $_POST['readingTime'];
                             $imagePath = "./public/upload/" . Security::htmlSafe($_FILES["image"]['name']);
                             $content = Security::htmlSafe($_POST["content"]);
                             $user = Security::htmlSafe($_POST["user"]);

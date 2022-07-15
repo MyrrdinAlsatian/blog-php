@@ -12,6 +12,15 @@ class VisitorManager extends MainManager
         $req->closeCursor();
         return $datas;
     }
+    public function getArticle($id)
+    {
+        $req = $this->getBdd()->prepare('SELECT u.username, a.title, a.modified, a.chapo, a.content, a.featureImage, a.created, a.modified, a.readingTime FROM article a INNER JOIN user u ON a.user_id = u.id WHERE a.id = :id');
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->execute();
+        $datas = $req->fetch(PDO::FETCH_ASSOC);
+        $req->closeCursor();
+        return $datas;
+    }
     public function getLastArticles()
     {
         $req = $this->getBdd()->prepare('SELECT * FROM article WHERE status = 1  ORDER BY id DESC LIMIT 3 ');
