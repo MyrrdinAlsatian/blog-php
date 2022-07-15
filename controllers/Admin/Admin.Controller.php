@@ -56,7 +56,7 @@ class AdminController extends MainController
             "page_description" => " Blog OpenClassroom",
             "page_title" => "Backoffice listing des articles",
             "allArticles" => $articlesData,
-            // "page_javascript" => ["profile.js"],
+            "page_javascript" => ["articleStatus.js"],
             'view' => "views/Admin/articles.view.php",
             "template" => "views/common/admin.template.php"
         ];
@@ -65,7 +65,6 @@ class AdminController extends MainController
 
     public function newArticle()
     {
-        $articlesData = $this->adminManager->getAllArticles();
         $data_page = [
             "page_description" => " Blog OpenClassroom",
             "page_title" => "Backoffice listing des articles",
@@ -93,6 +92,17 @@ class AdminController extends MainController
             header('Location: ' . URL . 'backoffice/articles');
         } else {
             Toolbox::ajouterMessageAlerte('L\'article' . $title . 'n\'à pas été supprimer', Toolbox::COULEUR_ORANGE);
+            header('Location: ' . URL . 'backoffice/articles');
+        }
+    }
+
+    public function updateStatus($id, $status)
+    {
+        if ($this->adminManager->updateArticleStatus($id, $status)) {
+            Toolbox::ajouterMessageAlerte('Le status a bien été mise à jour', Toolbox::COULEUR_VERTE);
+            header('Location: ' . URL . 'backoffice/articles');
+        } else {
+            Toolbox::ajouterMessageAlerte('Le status n\'a pas été mise à jour', Toolbox::COULEUR_ORANGE);
             header('Location: ' . URL . 'backoffice/articles');
         }
     }

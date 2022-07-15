@@ -58,6 +58,16 @@ class AdminManager extends MainManager
         $req->closeCursor();
         return $isDone;
     }
+    public function updateArticleStatus($id, $newStatus)
+    {
+        $req = $this->getBdd()->prepare('UPDATE Article SET status = :status WHERE id = :id');
+        $req->bindValue(':status', $newStatus, PDO::PARAM_INT);
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->execute();
+        $isUpdated = ($req->rowCount() > 0);
+        $req->closeCursor();
+        return $isUpdated;
+    }
 
     public function getAllArticles()
     {
