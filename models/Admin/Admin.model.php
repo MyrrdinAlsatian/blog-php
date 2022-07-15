@@ -68,6 +68,57 @@ class AdminManager extends MainManager
         $req->closeCursor();
         return $isUpdated;
     }
+    public function updateArticleTitle($id, $title)
+    {
+        $req = $this->getBdd()->prepare('UPDATE Article SET title = :title, modified = current_timestamp() WHERE id = :id');
+        $req->bindValue(':title', $title, PDO::PARAM_STR);
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->execute();
+        $isUpdated = ($req->rowCount() > 0);
+        $req->closeCursor();
+        return $isUpdated;
+    }
+    public function updateArticleChapo($id, $chapo)
+    {
+        $req = $this->getBdd()->prepare('UPDATE Article SET chapo = :chapo, modified = current_timestamp() WHERE id = :id');
+        $req->bindValue(':chapo', $chapo, PDO::PARAM_STR);
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->execute();
+        $isUpdated = ($req->rowCount() > 0);
+        $req->closeCursor();
+        return $isUpdated;
+    }
+    public function updateArticleImg($id, $path)
+    {
+        $req = $this->getBdd()->prepare('UPDATE Article SET featureImage = :feat, modified = current_timestamp() WHERE id = :id');
+        $req->bindValue(':feat', $path, PDO::PARAM_STR);
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->execute();
+        $isUpdated = ($req->rowCount() > 0);
+        $req->closeCursor();
+        return $isUpdated;
+    }
+    public function updateArticleContent($id, $content)
+    {
+        $req = $this->getBdd()->prepare('UPDATE Article SET content = :content, modified = current_timestamp() WHERE id = :id');
+        $req->bindValue(':content', $content, PDO::PARAM_STR);
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->execute();
+        $isUpdated = ($req->rowCount() > 0);
+        $req->closeCursor();
+        return $isUpdated;
+    }
+
+    public function updateArticleReadingTime($id, $readTime)
+    {
+        $req = $this->getBdd()->prepare('UPDATE Article SET readingTime = :readTime, modified = current_timestamp() WHERE id = :id');
+        $req->bindValue(':readTime', $readTime, PDO::PARAM_STR);
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->execute();
+        $isUpdated = ($req->rowCount() > 0);
+        $req->closeCursor();
+        return $isUpdated;
+    }
 
     public function getAllArticles()
     {
@@ -76,5 +127,24 @@ class AdminManager extends MainManager
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
         $req->closeCursor();
         return $data;
+    }
+    public function getArticle($id)
+    {
+        $req = $this->getBdd()->prepare('SELECT u.username, a.id, a.title, a.modified, a.chapo, a.content, a.featureImage, a.created, a.modified, a.readingTime FROM article a INNER JOIN user u ON a.user_id = u.id WHERE a.id = :id');
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->execute();
+        $datas = $req->fetch(PDO::FETCH_ASSOC);
+        $req->closeCursor();
+        return $datas;
+    }
+
+    public function isValidArticleId($id): bool
+    {
+        $req = $this->getBdd()->prepare('SELECT * FROM article WHERE id = :id');
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->execute();
+        $isValid = ($req->rowCount() === 1);
+        $req->closeCursor();
+        return $isValid;
     }
 }

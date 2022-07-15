@@ -53,7 +53,11 @@ try {
             $visitorController->articles();
             break;
         case 'article':
-            $visitorController->article($url[1]);
+            if ($url[2] == 'edit') {
+                $adminController->updateArticle($url[1]);
+            } else {
+                $visitorController->article($url[1]);
+            }
             break;
         case 'validation_register':
             if (!empty($_POST["mail"] && !empty($_POST["password"])) && !empty($_POST['pseudo']) && !empty($_POST['confirmpassword'])) {
@@ -77,6 +81,88 @@ try {
             break;
         case 'validationMail':
             $userController->validationMail($url[1], $url[2]);
+            break;
+        case 'validate_articleTitleModification':
+            if (Security::isAdmin()) {
+                if (
+                    !empty($_POST['title']) &&
+                    !empty($_POST['id'])
+                ) {
+                    $title = Security::htmlSafe((string)$_POST['title']);
+                    $id = Security::numberSafe($_POST["id"]);
+
+                    $adminController->articleTitleModification($id, $title);
+                }
+            } else {
+                Toolbox::ajouterMessageAlerte('Vous ne pouvez pas accèder à cette page.', Toolbox::COULEUR_ROUGE);
+                header('Location: ' . URL);
+            }
+            break;
+        case 'validate_articleChapoModification':
+            if (Security::isAdmin()) {
+                if (
+                    !empty($_POST['chapo']) &&
+                    !empty($_POST['id'])
+                ) {
+                    $chapo = Security::htmlSafe((string)$_POST['chapo']);
+                    $id = Security::numberSafe($_POST["id"]);
+
+                    $adminController->articleChapoModification($id, $chapo);
+                }
+            } else {
+                Toolbox::ajouterMessageAlerte('Vous ne pouvez pas accèder à cette page.', Toolbox::COULEUR_ROUGE);
+                header('Location: ' . URL);
+            }
+            break;
+        case 'validate_articleContentModification':
+            if (Security::isAdmin()) {
+                if (
+                    !empty($_POST['content']) &&
+                    !empty($_POST['id'])
+                ) {
+                    $content = Security::htmlSafe((string)$_POST['content']);
+                    $id = Security::numberSafe($_POST["id"]);
+
+                    $adminController->articleContentModification($id, $content);
+                }
+            } else {
+                Toolbox::ajouterMessageAlerte('Vous ne pouvez pas accèder à cette page.', Toolbox::COULEUR_ROUGE);
+                header('Location: ' . URL);
+            }
+            break;
+        case 'validate_articleImgModification':
+            if (Security::isAdmin()) {
+                if (
+                    isset($_FILES["img"]) &&
+                    !empty($_POST['id'])
+                ) {
+                    $id = Security::numberSafe($_POST["id"]);
+                    $imagePath = "./public/upload/" . Security::urlSafe($_FILES["img"]['name']);
+
+                    $adminController->articleImgModification($id, $imagePath);
+                    move_uploaded_file($_FILES["img"]["tmp_name"], $imagePath);
+                }
+            } else {
+                Toolbox::ajouterMessageAlerte('Vous ne pouvez pas accèder à cette page.', Toolbox::COULEUR_ROUGE);
+                header('Location: ' . URL);
+            }
+            break;
+        case 'validate_articleTimeModification':
+            if (Security::isAdmin()) {
+                if (
+                    !empty($_POST['readingTime']) &&
+                    !empty($_POST['id'])
+                ) {
+                    $id = Security::numberSafe($_POST["id"]);
+                    $time = Security::numberSafe($_POST["readingTime"]);
+
+                    $adminController->articleTimeModification($id, $time);
+                }
+            } else {
+                Toolbox::ajouterMessageAlerte('Vous ne pouvez pas accèder à cette page.', Toolbox::COULEUR_ROUGE);
+                header('Location: ' . URL);
+            }
+
             break;
         case 'backoffice':
             if (Security::isConnected()) {
