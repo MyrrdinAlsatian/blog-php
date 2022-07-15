@@ -50,7 +50,7 @@ class AdminManager extends MainManager
         $req->bindValue(':subtitle', $subtitle, PDO::PARAM_STR);
         $req->bindValue(':status', $status, PDO::PARAM_INT);
         $req->bindValue(':content', $content, PDO::PARAM_STR);
-        $req->bindValue(':readTime', $readTime, PDO::PARAM_STR);
+        $req->bindValue(':readTime', $readTime, PDO::PARAM_INT);
         $req->bindValue(':user', $user, PDO::PARAM_INT);
         $req->bindValue(':imgPath', $imgPath, PDO::PARAM_STR);
         $req->execute();

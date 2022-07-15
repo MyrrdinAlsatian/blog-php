@@ -25,9 +25,9 @@
         </div>
         <div class="col-3">
             <label for="readingTime" class="form-label">
-                readingTime
+                temps de lecture
             </label>
-            <input type="time" class="form-control" name="readingTime" id="readingTime" />
+            <input type="number" class="form-control" name="readingTime" id="readingTime" min="1" max="120" />
         </div>
         <div class="col-6">
             <label for="image" class="form-label">
