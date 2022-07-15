@@ -92,15 +92,27 @@ class VisitorController extends MainController
     }
     public function article($id)
     {
-        $article = $this->visitorManager->getArticle($id);
-        $data_page = [
-            "page_description" => " Blog OpenClassroom",
-            "page_title" => "Articles du blog jb",
-            "page_data" => $article,
-            'view' => "views/Visitor/blogItem.view.php",
-            "template" => "views/common/template.php"
-        ];
-        $this->generatePage($data_page);
+        if (ctype_digit($id)) {
+            (int)$isID =  Security::numberSafe($id);
+            if ($this->visitorManager->isValidArticleId($isID)) {
+
+                $article = $this->visitorManager->getArticle($isID);
+                $data_page = [
+                    "page_description" => " Blog OpenClassroom",
+                    "page_title" => "Articles du blog jb",
+                    "page_data" => $article,
+                    'view' => "views/Visitor/blogItem.view.php",
+                    "template" => "views/common/template.php"
+                ];
+                $this->generatePage($data_page);
+            } else {
+                Toolbox::ajouterMessageAlerte('Cette page n\'existe pas', Toolbox::COULEUR_ROUGE);
+                header('Location: ' . URL . 'articles');
+            }
+        } else {
+            Toolbox::ajouterMessageAlerte('Cette page n\'existe pas', Toolbox::COULEUR_ROUGE);
+            header('Location: ' . URL . 'articles');
+        }
     }
 
     public function ErrorPage($msg): void

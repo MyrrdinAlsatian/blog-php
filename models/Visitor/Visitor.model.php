@@ -49,6 +49,16 @@ class VisitorManager extends MainManager
         return $available;
     }
 
+    public function isValidArticleId($id): bool
+    {
+        $req = $this->getBdd()->prepare('SELECT * FROM article WHERE id = :id');
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->execute();
+        $isValid = ($req->rowCount() === 1);
+        $req->closeCursor();
+        return $isValid;
+    }
+
     public  function createNewAccount($password, $pseudo, $mail, $key)
     {
         $req = $this->getBdd()->prepare('INSERT INTO user ( username,email,password,create_time,role,isValid,linkValid) VALUES (:pseudo,:mail,:password,current_timestamp(),0,0,:key)');
