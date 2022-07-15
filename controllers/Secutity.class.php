@@ -7,7 +7,7 @@ class Security
 
     public static function htmlSafe($entry)
     {
-        return htmlentities($entry);
+        return htmlspecialchars($entry);
     }
     public static function emailSafe($mail)
     {
