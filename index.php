@@ -59,6 +59,17 @@ try {
                 $adminController->updateArticle($url[1]);
             }
             break;
+        case 'sendComment':
+
+            if (!empty($_POST['id']) && !empty($_POST['text'])) {
+                if (!empty($_SESSION['profile'])) {
+                    $userController->addComment($_POST['id'], $_POST['text']);
+                } else {
+                    Toolbox::ajouterMessageAlerte('Veuillez vous connecter :' . URL . 'login', Toolbox::COULEUR_ROUGE);
+                    header('Location:' . URL . 'article/' . $_POST['id']);
+                }
+            }
+            break;
         case 'validation_register':
             if (!empty($_POST["mail"] && !empty($_POST["password"])) && !empty($_POST['pseudo']) && !empty($_POST['confirmpassword'])) {
                 if ($_POST['confirmpassword'] !== $_POST['password']) {
@@ -269,6 +280,13 @@ try {
                         break;
                     case "update_status_articles":
                         $adminController->updateStatus((int)Security::htmlSafe($_POST["id"]), (int)Security::htmlSafe($_POST["status"]));
+                        break;
+                    case "comments":
+                        $adminController->comments();
+                        break;
+
+                    case "update_status_comments":
+                        $adminController->UpdateCommentStatus((int)Security::htmlSafe($_POST["id"]), (int)Security::htmlSafe($_POST["status"]));
                         break;
                     default:
                         throw new Exception("ce profile n'existe pas");

@@ -52,7 +52,7 @@
                 </div>
             </div>
 
-            <div class="last-comment">
+            <!--<div class="last-comment">
                 <h2>Last Comment</h2>
                 <div class="comments">
                     <div class="comment">
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
     <?php require_once("admin.footer.php") ?>

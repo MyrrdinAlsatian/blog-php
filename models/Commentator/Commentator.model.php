@@ -87,4 +87,23 @@ class CommentatorManager extends MainManager
         $req->closeCursor();
         return $validated;
     }
+
+    public function getNonValideComments()
+    {
+        $req = $this->getBdd()->query('SELECT COUNT(*) FROM comment WHERE status = 0 ');
+        $rowNbr = $req->fetchColumn();
+        $req->closeCursor();
+        return $rowNbr;
+    }
+    public function setComment($article_id, $comment, $user_id)
+    {
+        $req = $this->getBdd()->prepare('INSERT INTO comment (uuid,article_id, content, user_id) VALUES (uuid(),:id, :comment, :user)');
+        $req->bindValue(':id', $article_id, PDO::PARAM_INT);
+        $req->bindValue(':comment', $comment, PDO::PARAM_STR);
+        $req->bindValue(':user', $user_id, PDO::PARAM_INT);
+        $req->execute();
+        $isAdded = ($req->rowCount() == 1);
+        $req->closeCursor();
+        return $isAdded;
+    }
 }
