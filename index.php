@@ -53,10 +53,10 @@ try {
             $visitorController->articles();
             break;
         case 'article':
-            if ($url[2] == 'edit') {
-                $adminController->updateArticle($url[1]);
-            } else {
+            if (!isset($url[2])) {
                 $visitorController->article($url[1]);
+            } elseif ($url[2] === "edit") {
+                $adminController->updateArticle($url[1]);
             }
             break;
         case 'validation_register':
