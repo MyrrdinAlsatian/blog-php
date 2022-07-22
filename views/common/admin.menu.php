@@ -33,7 +33,7 @@
         endif;
         ?>
 
-        <a href="<?= URL ?>backoffice/comment" rel="noopener noreferrer" class="d-flex align-items-center text-center">
+        <a href="<?= URL ?>backoffice/comments" rel="noopener noreferrer" class="d-flex align-items-center text-center">
             <span class="material-icons-sharp"> comment_bank </span>
             <h3>Comment</h3>
             <?php
