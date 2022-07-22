@@ -36,7 +36,11 @@
         <a href="<?= URL ?>backoffice/comment" rel="noopener noreferrer" class="d-flex align-items-center text-center">
             <span class="material-icons-sharp"> comment_bank </span>
             <h3>Comment</h3>
-            <span class="bg-danger text-light count">25</span>
+            <?php
+            if ($comment_nbr > 0) :
+            ?>
+                <span class="bg-danger text-light count"><?= $comment_nbr ?></span>
+            <?php endif; ?>
         </a>
         <a href="<?= URL ?>logout" rel="noopener noreferrer" class="d-flex align-items-center text-center">
             <span class="material-icons-sharp"> logout </span>

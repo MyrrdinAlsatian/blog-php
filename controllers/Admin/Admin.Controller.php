@@ -15,11 +15,14 @@ class AdminController extends MainController
 
     public function listUsers()
     {
+        $rowNbr = $this->adminManager->getNonValideComments();
         $usersData = $this->adminManager->getAllUtilisateurs();
+
         $data_page = [
             "page_description" => " Blog OpenClassroom",
             "page_title" => "Profile de " . $_SESSION["profile"]['mail'] . "",
             "allUsers" => $usersData,
+            "comment_nbr" => $rowNbr,
             "page_javascript" => ["profile.js"],
             'view' => "views/Admin/users.view.php",
             "template" => "views/common/admin.template.php"
@@ -51,11 +54,15 @@ class AdminController extends MainController
 
     public function articles()
     {
+        $rowNbr = $this->adminManager->getNonValideComments();
+
+
         $articlesData = $this->adminManager->getAllArticles();
         $data_page = [
             "page_description" => " Blog OpenClassroom",
             "page_title" => "Backoffice listing des articles",
             "allArticles" => $articlesData,
+            "comment_nbr" => $rowNbr,
             "page_javascript" => ["articleStatus.js"],
             'view' => "views/Admin/articles.view.php",
             "template" => "views/common/admin.template.php"
@@ -65,10 +72,12 @@ class AdminController extends MainController
 
     public function newArticle()
     {
+        $rowNbr = $this->adminManager->getNonValideComments();
         $data_page = [
             "page_description" => " Blog OpenClassroom",
             "page_title" => "Backoffice listing des articles",
             // "page_javascript" => ["profile.js"],
+            "comment_nbr" => $rowNbr,
             'view' => "views/Admin/newArticle.view.php",
             "template" => "views/common/admin.template.php"
         ];
@@ -113,10 +122,12 @@ class AdminController extends MainController
             if ($this->adminManager->isValidArticleId($isID)) {
 
                 $article = $this->adminManager->getArticle($isID);
+                $rowNbr = $this->adminManager->getNonValideComments();
                 $data_page = [
                     "page_description" => " Blog OpenClassroom",
                     "page_title" => "Articles du blog jb",
                     "page_data" => $article,
+                    "comment_nbr" => $rowNbr,
                     'view' => "views/Admin/modificationBlogItem.view.php",
                     "template" => "views/common/template.php"
                 ];
@@ -240,6 +251,21 @@ class AdminController extends MainController
             Toolbox::ajouterMessageAlerte('Cette page n\'existe pas', Toolbox::COULEUR_ROUGE);
             header('Location: ' . URL . 'articles');
         }
+    }
+
+    public function comments()
+    {
+        $comments = $this->adminManager->getAllComments();
+        $rowNbr = $this->adminManager->getNonValideComments();
+        $data_page = [
+            "page_description" => " Blog OpenClassroom",
+            "page_title" => "Commentaire sur le blog jb",
+            "page_data" => $comments,
+            "comment_nbr" => $rowNbr,
+            'view' => "views/admin/comment.view.php",
+            "template" => "views/common/admin.template.php"
+        ];
+        $this->generatePage($data_page);
     }
 
     public function ErrorPage($msg): void
