@@ -63,7 +63,7 @@ class AdminController extends MainController
             "page_title" => "Backoffice listing des articles",
             "allArticles" => $articlesData,
             "comment_nbr" => $rowNbr,
-            "page_javascript" => ["articleStatus.js"],
+            "page_javascript" => ["status.js"],
             'view' => "views/Admin/articles.view.php",
             "template" => "views/common/admin.template.php"
         ];
@@ -262,10 +262,26 @@ class AdminController extends MainController
             "page_title" => "Commentaire sur le blog jb",
             "page_data" => $comments,
             "comment_nbr" => $rowNbr,
+            "page_javascript" => ["status.js"],
             'view' => "views/admin/comment.view.php",
             "template" => "views/common/admin.template.php"
         ];
         $this->generatePage($data_page);
+    }
+
+    public function UpdateCommentStatus($id, $status)
+    {
+        if ($this->adminManager->updateCommentStatus($id, $status)) {
+            $mail = "stephan.jeanba@gmail.com"; // $_SESSION['mail']
+            $subject = "Un commentaire sur " . URL . " a été validé";
+            $content = "Votre Commentaire a été accepté ";
+            Toolbox::sendMail($mail, $subject, $content);
+            Toolbox::ajouterMessageAlerte('Le status a bien été mise à jour', Toolbox::COULEUR_VERTE);
+            header('Location: ' . URL . 'backoffice/comments');
+        } else {
+            Toolbox::ajouterMessageAlerte('Le status n\'a pas été mise à jour', Toolbox::COULEUR_ORANGE);
+            header('Location: ' . URL . 'backoffice/comments');
+        }
     }
 
     public function ErrorPage($msg): void
