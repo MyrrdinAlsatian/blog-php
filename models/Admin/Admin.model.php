@@ -147,4 +147,20 @@ class AdminManager extends MainManager
         $req->closeCursor();
         return $isValid;
     }
+
+    public function getAllComments()
+    {
+        $req = $this->getBdd()->prepare('SELECT comment.uuid,comment.status, comment.content, comment.created, user.username, user.email, article.title, article.id FROM comment INNER JOIN user ON user.id=comment.user_id INNER JOIN article ON article.id= comment.article_id');
+        $req->execute();
+        $datas = $req->fetchAll(PDO::FETCH_ASSOC);
+        $req->closeCursor();
+        return $datas;
+    }
+    public function getNonValideComments()
+    {
+        $req = $this->getBdd()->query('SELECT COUNT(*) FROM comment WHERE status = 0 ');
+        $rowNbr = $req->fetchColumn();
+        $req->closeCursor();
+        return $rowNbr;
+    }
 }
