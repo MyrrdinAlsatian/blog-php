@@ -87,4 +87,12 @@ class CommentatorManager extends MainManager
         $req->closeCursor();
         return $validated;
     }
+
+    public function getNonValideComments()
+    {
+        $req = $this->getBdd()->query('SELECT COUNT(*) FROM comment WHERE status = 0 ');
+        $rowNbr = $req->fetchColumn();
+        $req->closeCursor();
+        return $rowNbr;
+    }
 }
