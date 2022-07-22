@@ -1,6 +1,5 @@
 <?php
 $article = $page_data;
-print_r($_SESSION)
 ?>
 <main class="single-blog__content">
     <base href="<?= URL ?>" target="_blank">
@@ -56,7 +55,7 @@ print_r($_SESSION)
 
         </details>
         <div class="container justify-content-center mt-5 border-left border-right">
-            <div class="d-flex w-100">
+            <div class="d-flex  w-100">
                 <?php if (!empty($_SESSION['profile'])) : ?>
                     <form method="post" action="<?= URL ?>sendComment" class="d-flex w-100">
                         <input type="hidden" name="id" value="<?= $article['id'] ?>" />
@@ -70,7 +69,7 @@ print_r($_SESSION)
             </div>
             <?php if (!empty($comments)) : ?>
                 <?php foreach ($comments as $comment) : ?>
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex flex-column justify-content-center border-bottom">
                         <div class="w-100  py-2 px-2"> <span class="fs-3"><?= $comment['content'] ?></span>
                             <div class="d-flex justify-content-between py-1 pt-2">
                                 <div><span class="text2"> <?= $comment['username']  ?> </span></div>
