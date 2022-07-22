@@ -60,7 +60,7 @@
                                 </td>
                                 <td>
                                     <div class="d-flex gap-2">
-                                        <form method="POST" action="<?= URL . 'backoffice/deleteArticle' ?>">
+                                        <form method="POST" action="<?= URL . 'backoffice/deleteComment' ?>">
                                             <input type="hidden" name="id" value="<?= $comment['uuid'] ?>" />
                                             <button class="btn btn-danger btn-xs" href="">
                                                 <span class="material-icons-sharp"> delete </span>
