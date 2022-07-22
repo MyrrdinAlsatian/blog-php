@@ -173,4 +173,14 @@ class AdminManager extends MainManager
         $req->closeCursor();
         return $rowNbr;
     }
+
+    public function unsetComment($uuid)
+    {
+        $req = $this->getBdd()->prepare('DELETE comment FROM comment WHERE uuid = :uuid ');
+        $req->bindValue(':uuid', $uuid, PDO::PARAM_STR);
+        $req->execute();
+        $isDeleted = ($req->rowCount() == 1);
+        $req->closeCursor();
+        return $isDeleted;
+    }
 }

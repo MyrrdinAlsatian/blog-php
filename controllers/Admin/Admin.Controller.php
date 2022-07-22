@@ -283,6 +283,16 @@ class AdminController extends MainController
             header('Location: ' . URL . 'backoffice/comments');
         }
     }
+    public function deleteComment($uuid)
+    {
+        if ($this->adminManager->unsetComment($uuid)) {
+            Toolbox::ajouterMessageAlerte('Le commentaire a bien été supprimer', Toolbox::COULEUR_VERTE);
+            header('Location: ' . URL . 'backoffice/comments');
+        } else {
+            Toolbox::ajouterMessageAlerte('Le commentaire n\'a bien été supprimer', Toolbox::COULEUR_ORANGE);
+            header('Location: ' . URL . 'backoffice/comments');
+        }
+    }
 
     public function ErrorPage($msg): void
     {

@@ -288,6 +288,10 @@ try {
                     case "update_status_comments":
                         $adminController->UpdateCommentStatus((int)Security::htmlSafe($_POST["id"]), (int)Security::htmlSafe($_POST["status"]));
                         break;
+                    case 'deleteComment':
+                        $id = Security::htmlSafe($_POST["id"]);
+                        $adminController->deleteComment($id);
+                        break;
                     default:
                         throw new Exception("ce profile n'existe pas");
                 }
