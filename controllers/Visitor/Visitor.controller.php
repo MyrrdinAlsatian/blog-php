@@ -97,10 +97,12 @@ class VisitorController extends MainController
             if ($this->visitorManager->isValidArticleId($isID)) {
 
                 $article = $this->visitorManager->getArticle($isID);
+                $comments = $this->visitorManager->getValidComments($isID);
                 $data_page = [
                     "page_description" => " Blog OpenClassroom",
                     "page_title" => "Articles du blog jb",
                     "page_data" => $article,
+                    "comments" => $comments,
                     'view' => "views/Visitor/blogItem.view.php",
                     "template" => "views/common/template.php"
                 ];

@@ -43,6 +43,9 @@ class CommentatorController extends MainController
     public function profile()
     {
         $userData = $this->commentatorManager->getUserData($_SESSION["profile"]['mail']);
+        $rowNbr = $this->commentatorManager->getNonValideComments();
+
+
         $_SESSION['profile']['role'] = $userData['role'];
         $_SESSION['profile']['username'] = $userData['username'];
         $_SESSION['profile']['id'] = $userData['id'];
@@ -50,6 +53,7 @@ class CommentatorController extends MainController
             "page_description" => " Blog OpenClassroom",
             "page_title" => "Profile de " . $_SESSION["profile"]['mail'] . "",
             "user" => $userData,
+            "comment_nbr" => $rowNbr,
             "page_javascript" => ["profile.js"],
             'view' => "views/Commentator/profile.view.php",
             "template" => "views/common/admin.template.php"
@@ -125,6 +129,19 @@ class CommentatorController extends MainController
         } else {
             Toolbox::ajouterMessageAlerte("Impossible de supprimer ce compte, veuillez contacter l'administrateur", Toolbox::COULEUR_ROUGE);
             header('Location: ' . URL . "backoffice/profile");
+        }
+    }
+    public function addComment($id, $content)
+    {
+        $id_article = Security::htmlSafe($id);
+        $comment_content = Security::htmlSafe($content);
+        $user_id = $_SESSION['profile']['id'];
+        if ($this->commentatorManager->setComment($id_article, $comment_content, $user_id)) {
+            Toolbox::ajouterMessageAlerte('Votre commentaire a bien été envoyé, il doit encore être valider par un administrateur', Toolbox::COULEUR_VERTE);
+            header('Location: ' . URL . "article/. $id_article");
+        } else {
+            Toolbox::ajouterMessageAlerte("Impossible d 'ajouter un commentaire", Toolbox::COULEUR_ROUGE);
+            header('Location: ' . URL . "article/. $id_article");
         }
     }
     public function ErrorPage($msg): void
