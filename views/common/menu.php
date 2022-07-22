@@ -6,7 +6,7 @@
             </li>
 
             <li class="navigation__item">
-                <a class="navigation__link" href="./blog-item.html">Blog</a>
+                <a class="navigation__link" href="/articles">Blog</a>
             </li>
             <li class="navigation__item">
                 <a class="navigation__link" href="/contact">Contact</a>
