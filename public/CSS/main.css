@@ -1061,6 +1061,8 @@ body {
   width: 100%;
   background: #2c2b3b;
   position: relative;
+  aspect-ratio: 1.5 / 1;
+  object-fit: cover;
 }
 .blogs-bloc__item header {
   margin: 17px 12px;
@@ -1905,14 +1907,19 @@ body {
   border-bottom: 1px solid #dedede;
 }
 .single-blog__content {
+  margin-top: 14rem;
   display: grid;
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(4, auto) 300px;
   grid-template-rows: repeat(6, auto);
   grid-column-gap: 25px;
   grid-row-gap: 0px;
 }
+.single-blog__content input,
+.single-blog__content textarea{
+  width: 100%;
+}
 .single-blog__core{
-  grid-area: 2/1/auto/5;
+  grid-area: 2/1/auto/6;
 }
 .single-blog__title {
   margin: 0;
@@ -1929,6 +1936,9 @@ body {
   .single-blog__searchbar {
     grid-area: 1/1/2/6;
   }
+    .single-blog__core {
+      grid-area: 2/1/auto/5;
+    }
   .single-blog__text {
     grid-area: 3/1/7/5;
   }

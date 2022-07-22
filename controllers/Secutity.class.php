@@ -13,6 +13,14 @@ class Security
     {
         return strip_tags(filter_var($mail, FILTER_SANITIZE_EMAIL));
     }
+    public static function urlSafe($url)
+    {
+        return strip_tags(filter_var($url, FILTER_SANITIZE_URL));
+    }
+    public static function numberSafe($number)
+    {
+        return strip_tags(filter_var($number, FILTER_SANITIZE_NUMBER_INT));
+    }
     public static function isConnected(): bool
     {
         return (!empty($_SESSION["profile"]));

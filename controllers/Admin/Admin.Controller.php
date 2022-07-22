@@ -56,7 +56,7 @@ class AdminController extends MainController
             "page_description" => " Blog OpenClassroom",
             "page_title" => "Backoffice listing des articles",
             "allArticles" => $articlesData,
-            // "page_javascript" => ["profile.js"],
+            "page_javascript" => ["articleStatus.js"],
             'view' => "views/Admin/articles.view.php",
             "template" => "views/common/admin.template.php"
         ];
@@ -65,7 +65,6 @@ class AdminController extends MainController
 
     public function newArticle()
     {
-        $articlesData = $this->adminManager->getAllArticles();
         $data_page = [
             "page_description" => " Blog OpenClassroom",
             "page_title" => "Backoffice listing des articles",
@@ -81,8 +80,165 @@ class AdminController extends MainController
             Toolbox::ajouterMessageAlerte('L\'article' . $title . 'à été ajouté', Toolbox::COULEUR_VERTE);
             header('Location: ' . URL . 'backoffice/articles');
         } else {
-            Toolbox::ajouterMessageAlerte('L\'article' . $title . 'à été ajouté', Toolbox::COULEUR_VERTE);
+            Toolbox::ajouterMessageAlerte('Aucun article n\'a été ajouté', Toolbox::COULEUR_ORANGE);
             header('Location: ' . URL . 'backoffice/articles');
+        }
+    }
+
+    public function deleteArticle($id, $title)
+    {
+        if ($this->adminManager->unsetArticle($id)) {
+            Toolbox::ajouterMessageAlerte('L\'article' . $title . 'à été supprimer', Toolbox::COULEUR_VERTE);
+            header('Location: ' . URL . 'backoffice/articles');
+        } else {
+            Toolbox::ajouterMessageAlerte('L\'article' . $title . 'n\'à pas été supprimer', Toolbox::COULEUR_ORANGE);
+            header('Location: ' . URL . 'backoffice/articles');
+        }
+    }
+
+    public function updateStatus($id, $status)
+    {
+        if ($this->adminManager->updateArticleStatus($id, $status)) {
+            Toolbox::ajouterMessageAlerte('Le status a bien été mise à jour', Toolbox::COULEUR_VERTE);
+            header('Location: ' . URL . 'backoffice/articles');
+        } else {
+            Toolbox::ajouterMessageAlerte('Le status n\'a pas été mise à jour', Toolbox::COULEUR_ORANGE);
+            header('Location: ' . URL . 'backoffice/articles');
+        }
+    }
+    public function updateArticle($id)
+    {
+        if (ctype_digit($id)) {
+            (int)$isID =  Security::numberSafe($id);
+            if ($this->adminManager->isValidArticleId($isID)) {
+
+                $article = $this->adminManager->getArticle($isID);
+                $data_page = [
+                    "page_description" => " Blog OpenClassroom",
+                    "page_title" => "Articles du blog jb",
+                    "page_data" => $article,
+                    'view' => "views/Admin/modificationBlogItem.view.php",
+                    "template" => "views/common/template.php"
+                ];
+                $this->generatePage($data_page);
+            } else {
+                Toolbox::ajouterMessageAlerte('Cette page n\'existe pas', Toolbox::COULEUR_ROUGE);
+                header('Location: ' . URL . 'articles');
+            }
+        } else {
+            Toolbox::ajouterMessageAlerte('Cette page n\'existe pas', Toolbox::COULEUR_ROUGE);
+            header('Location: ' . URL . 'articles');
+        }
+    }
+    public function articleTitleModification($id, $title)
+    {
+        if (ctype_digit($id)) {
+            (int)$isID =  Security::numberSafe($id);
+            if ($this->adminManager->isValidArticleId($isID)) {
+
+                if ($this->adminManager->updateArticleTitle($id, $title)) {
+                    Toolbox::ajouterMessageAlerte('Le Titre de l\'article:' . $title . ' a été mise a jour', Toolbox::COULEUR_VERTE);
+                    header('Location:' . URL . 'article/' . $id . '/edit');
+                } else {
+                    Toolbox::ajouterMessageAlerte('Le Titre de l\'article:' . $title . ' n\'a pas été mise a jour', Toolbox::COULEUR_ORANGE);
+                    header('Location:' . URL . 'article/' . $id . '/edit');
+                }
+            } else {
+                Toolbox::ajouterMessageAlerte('Cette article n\'existe pas', Toolbox::COULEUR_ROUGE);
+                header('Location: ' . URL . 'articles');
+            }
+        } else {
+            Toolbox::ajouterMessageAlerte('Cette page n\'existe pas', Toolbox::COULEUR_ROUGE);
+            header('Location: ' . URL . 'articles');
+        }
+    }
+    public function articleChapoModification($id, $chapo)
+    {
+        if (ctype_digit($id)) {
+            (int)$isID =  Security::numberSafe($id);
+            if ($this->adminManager->isValidArticleId($isID)) {
+
+                if ($this->adminManager->updateArticleChapo($id, $chapo)) {
+                    Toolbox::ajouterMessageAlerte('Le chapo de l\'article: a été mise a jour', Toolbox::COULEUR_VERTE);
+                    header('Location:' . URL . 'article/' . $id . '/edit');
+                } else {
+                    Toolbox::ajouterMessageAlerte('Le chapo de l\'article: n\'a pas été mise a jour', Toolbox::COULEUR_ORANGE);
+                    header('Location:' . URL . 'article/' . $id . '/edit');
+                }
+            } else {
+                Toolbox::ajouterMessageAlerte('Cette article n\'existe pas', Toolbox::COULEUR_ROUGE);
+                header('Location: ' . URL . 'articles');
+            }
+        } else {
+            Toolbox::ajouterMessageAlerte('Cette page n\'existe pas', Toolbox::COULEUR_ROUGE);
+            header('Location: ' . URL . 'articles');
+        }
+    }
+    public function articleContentModification($id, $content)
+    {
+        if (ctype_digit($id)) {
+            (int)$isID =  Security::numberSafe($id);
+            if ($this->adminManager->isValidArticleId($isID)) {
+
+                if ($this->adminManager->updateArticleContent($id, $content)) {
+                    Toolbox::ajouterMessageAlerte('Le contenu de l\'article: a été mise a jour', Toolbox::COULEUR_VERTE);
+                    header('Location:' . URL . 'article/' . $id . '/edit');
+                } else {
+                    Toolbox::ajouterMessageAlerte('Le contenu de l\'article: n\'a pas été mise a jour', Toolbox::COULEUR_ORANGE);
+                    header('Location:' . URL . 'article/' . $id . '/edit');
+                }
+            } else {
+                Toolbox::ajouterMessageAlerte('Cette article n\'existe pas', Toolbox::COULEUR_ROUGE);
+                header('Location: ' . URL . 'articles');
+            }
+        } else {
+            Toolbox::ajouterMessageAlerte('Cette page n\'existe pas', Toolbox::COULEUR_ROUGE);
+            header('Location: ' . URL . 'articles');
+        }
+    }
+    public function articleImgModification($id, $img)
+    {
+        if (ctype_digit($id)) {
+            (int)$isID =  Security::numberSafe($id);
+            if ($this->adminManager->isValidArticleId($isID)) {
+
+                if ($this->adminManager->updateArticleImg($id, $img)) {
+                    Toolbox::ajouterMessageAlerte('L\'image de l\'article a été mise a jour', Toolbox::COULEUR_VERTE);
+                    header('Location:' . URL . 'article/' . $id . '/edit');
+                } else {
+                    Toolbox::ajouterMessageAlerte('L\'image de l\'article n\'a pas été mise a jour', Toolbox::COULEUR_ORANGE);
+                    header('Location:' . URL . 'article/' . $id . '/edit');
+                }
+            } else {
+                Toolbox::ajouterMessageAlerte('Cette article n\'existe pas', Toolbox::COULEUR_ROUGE);
+                header('Location: ' . URL . 'articles');
+            }
+        } else {
+            Toolbox::ajouterMessageAlerte('Cette page n\'existe pas', Toolbox::COULEUR_ROUGE);
+            header('Location: ' . URL . 'articles');
+        }
+    }
+
+    public function articleTimeModification($id, $time)
+    {
+        if (ctype_digit($id)) {
+            (int)$isID =  Security::numberSafe($id);
+            if ($this->adminManager->isValidArticleId($isID)) {
+
+                if ($this->adminManager->updateArticleReadingTime($id, $time)) {
+                    Toolbox::ajouterMessageAlerte('Le temps de lecture de l\'article: a été mise a jour', Toolbox::COULEUR_VERTE);
+                    header('Location:' . URL . 'article/' . $id . '/edit');
+                } else {
+                    Toolbox::ajouterMessageAlerte('Le temps de lecture de l\'article: n\'a pas été mise a jour', Toolbox::COULEUR_ORANGE);
+                    header('Location:' . URL . 'article/' . $id . '/edit');
+                }
+            } else {
+                Toolbox::ajouterMessageAlerte('Cette article n\'existe pas', Toolbox::COULEUR_ROUGE);
+                header('Location: ' . URL . 'articles');
+            }
+        } else {
+            Toolbox::ajouterMessageAlerte('Cette page n\'existe pas', Toolbox::COULEUR_ROUGE);
+            header('Location: ' . URL . 'articles');
         }
     }
 
