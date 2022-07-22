@@ -11,10 +11,6 @@
             <span class="material-icons-sharp"> home </span>
             <h3>Home</h3>
         </a>
-        <a href="<?= URL ?>backoffice" rel="noopener noreferrer" class="d-flex align-items-center text-center">
-            <span class="material-icons-sharp"> grid_view </span>
-            <h3>Dashboard</h3>
-        </a>
         <a href="<?= URL ?>backoffice/profile" rel="noopener noreferrer" class="d-flex align-items-center text-center">
             <span class="material-icons-sharp"> person_outline </span>
             <h3>Profile</h3>
