@@ -24,7 +24,7 @@
                                 <h6 class="mt-2 mt-md-0 mb-0"> <?= $comment['content'] ?></h6>
                             </td>
                             <td>
-                                <h6 class="mt-2 mt-md-0 mb-0"> <a href="<?= URL ?>/article/<?= $comment['id'] ?>"><?= $comment['title'] ?></a></h6>
+                                <h6 class="mt-2 mt-md-0 mb-0"> <a href="<?= URL ?>article/<?= $comment['id'] ?>"><?= $comment['title'] ?></a></h6>
                             </td>
                             <td>
                                 <h6 class="mt-2 mt-md-0"><?= $comment['username'] ?></h6>

@@ -37,7 +37,7 @@
             <span class="material-icons-sharp"> comment_bank </span>
             <h3>Comment</h3>
             <?php
-            if ($comment_nbr > 0) :
+            if ($comment_nbr > 0 && Security::isAdmin() || Security::isUser()) :
             ?>
                 <span class="bg-danger text-light count"><?= $comment_nbr ?></span>
             <?php endif; ?>

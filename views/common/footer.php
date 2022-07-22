@@ -1,4 +1,3 @@
-<div class="container">
     <footer class="footer">
         <h4 class="footer__header">Construisont ensemble !</h4>
         <figure class="footer__citation">
@@ -44,4 +43,3 @@
         </div>
         <p class="footer__cgu">Developed & code with <span>❤️</span> by Me</p>
     </footer>
-</div>
