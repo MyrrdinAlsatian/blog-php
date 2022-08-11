@@ -12,7 +12,7 @@ require_once('./controllers/Visitor/Visitor.controller.php');
 require_once('./controllers/Commentator/Commentator.controller.php');
 require_once('./controllers/Admin/Admin.controller.php');
 require_once("./controllers/Toolbox.class.php");
-require_once("./controllers/Secutity.class.php");
+require_once("./controllers/Security.class.php");
 
 $visitorController = new VisitorController();
 $userController = new CommentatorController();
