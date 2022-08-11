@@ -54,11 +54,16 @@ class Security
     public static function validateToken($token): bool
     {
         $parts = explode('|&|', self::urlSafeDecode($token));
-
+        $currentTime = time();
         if (count($parts) === 3) {
             $hash = hash_hmac('sha256', session_id() . $parts[1], $parts[2], CRSF_TOKEN_SECRET, true);
-            if (hash_equals($hash, $parts[0])) {
-                return true;
+            if ($currentTime - $parts[2] < (CSRF_VALIDATION_INTERVAL * 60)) {
+                if (hash_equals($hash, $parts[0])) {
+                    return true;
+                }
+            } else {
+                Toolbox::ajouterMessageAlerte("Le jeton CSRF n'est plus valide, veuillez recharger la page", Toolbox::COULEUR_ORANGE);
+                $_SESSION['token'] = self::createToken();
             }
         }
         return false;

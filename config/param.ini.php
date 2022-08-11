@@ -13,6 +13,6 @@ define('DB_NAME', 'blog');
 define('DB', 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8');
 // Security configuration
 define("CRSF_TOKEN_SECRET", "openclassroom");
-
+define("CSRF_VALIDATION_INTERVAL", 15);
 // ................
 include_once "vendor/autoload.php";
