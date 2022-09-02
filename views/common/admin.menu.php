@@ -1,7 +1,7 @@
 <aside>
     <div class="top">
         <div class="logo">
-            <img src="https://via.placeholder.com/150" />
+            <!--<img src="https://via.placeholder.com/150" />-->
         </div>
         <h2>Backoffice</h2>
         <button type="button" class="btn-close" aria-label="Close"></button>

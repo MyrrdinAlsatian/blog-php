@@ -18,6 +18,15 @@ $visitorController = new VisitorController();
 $userController = new CommentatorController();
 $adminController = new AdminController();
 
+if (!isset($_SESSION['TOKEN']['created'])) {
+    $_SESSION['TOKEN']['created'] = time();
+    $_SESSION['TOKEN']['token'] = Security::createToken();
+} elseif ($_SESSION['TOKEN']['created'] <= (time() - (CSRF_VALIDATION_INTERVAL * 1))) {
+    $_SESSION['TOKEN']['created'] = time();
+    $_SESSION['TOKEN']['token'] = Security::createToken();
+}
+print_r($_SESSION['TOKEN']);
+
 try {
     if (empty($_GET['page'])) {
         $page = "accueil";
