@@ -19,7 +19,7 @@
         endforeach;
         ?>
     </ol>
-    <a name="intro__btn-blog" id="intro__btn-blog" class="btn--custom btn-primary--custom" href="#" role="button">
+    <a name="intro__btn-blog" id="intro__btn-blog" class="btn--custom btn-primary--custom" href="<?= URL ?>articles" role="button">
         Voir plus d'articles
     </a>
 </section>

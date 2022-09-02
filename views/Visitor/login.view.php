@@ -25,7 +25,7 @@
                             <p class="text-white-50 mb-5">Veuillez rentrer vos identifiants!</p>
                             <form method="post" action="validation_login">
                                 <!--<input hidden name="FormType" value="login" /> -->
-                                <input hidden name="token" value="erzer" />
+                                <input hidden name="token" value="<?= $_SESSION['TOKEN']['token'] ?>" />
                                 <div class="form-outline form-white mb-4">
                                     <input name="mail" type="email" id="typeEmailX" class="form-control form-control-lg" required />
                                     <label class="form-label" for="typeEmailX">E-Mail</label>

@@ -21,9 +21,6 @@ $adminController = new AdminController();
 if (!isset($_SESSION['TOKEN']['created'])) {
     $_SESSION['TOKEN']['created'] = time();
     $_SESSION['TOKEN']['token'] = Security::createToken();
-} elseif ($_SESSION['TOKEN']['created'] <= (time() - (CSRF_VALIDATION_INTERVAL * 1))) {
-    $_SESSION['TOKEN']['created'] = time();
-    $_SESSION['TOKEN']['token'] = Security::createToken();
 }
 print_r($_SESSION['TOKEN']);
 
@@ -44,9 +41,17 @@ try {
             break;
         case 'validation_login':
             if (!empty($_POST["mail"] && !empty($_POST["password"]))) {
-                $mail = Security::emailSafe($_POST["mail"]);
-                $password = Security::htmlSafe($_POST['password']);
-                $userController->validation_login($mail, $password);
+                if (!empty($_POST["token"])) {
+                    if ($_POST["token"] == $_SESSION['TOKEN']["token"]) {
+
+                        $mail = Security::emailSafe($_POST["mail"]);
+                        $password = Security::htmlSafe($_POST['password']);
+                        $userController->validation_login($mail, $password);
+                    }
+                } else {
+                    Toolbox::ajouterMessageAlerte("Mot de passe ou email non renseigné |" . Security::validateToken($_POST['token']) . "|||", Toolbox::COULEUR_ROUGE);
+                    header('Location: ' . URL . "login");
+                }
             } else {
                 Toolbox::ajouterMessageAlerte("Mot de passe ou email non renseigné", Toolbox::COULEUR_ROUGE);
                 header('Location: ' . URL . "login");

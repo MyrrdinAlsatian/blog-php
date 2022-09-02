@@ -1,6 +1,6 @@
 <?php
 
-
+require_once('./config/param.ini.php');
 
 class Security
 {
@@ -42,11 +42,11 @@ class Security
         return self::urlSafeEncode($hash . '|&|' . $seed . '|&|' . $time);
     }
 
-    public static function urlSafeEncode($m): string
+    private static function urlSafeEncode($m): string
     {
         return rtrim(strtr(base64_encode($m), '+/', '-_'), '=');
     }
-    public static function urlSafeDecode($m): string
+    private static function urlSafeDecode($m): string
     {
         return base64_decode(strstr($m, '-_', '+/'));
     }
@@ -54,16 +54,12 @@ class Security
     public static function validateToken($token): bool
     {
         $parts = explode('|&|', self::urlSafeDecode($token));
-        $currentTime = time();
-        if (count($parts) === 3) {
+        print_r($token);
+        die();
+        if (count($parts) == 3) {
             $hash = hash_hmac('sha256', session_id() . $parts[1], $parts[2], CRSF_TOKEN_SECRET, true);
-            if ($currentTime - $parts[2] < (CSRF_VALIDATION_INTERVAL * 60)) {
-                if (hash_equals($hash, $parts[0])) {
-                    return true;
-                }
-            } else {
-                Toolbox::ajouterMessageAlerte("Le jeton CSRF n'est plus valide, veuillez recharger la page", Toolbox::COULEUR_ORANGE);
-                $_SESSION['token'] = self::createToken();
+            if (hash_equals($hash, $parts[0])) {
+                return true;
             }
         }
         return false;
