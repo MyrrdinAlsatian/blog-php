@@ -3,7 +3,7 @@
 // SMTP server configuration
 define('SMTP_HOST', 'mail.jbscreative.dev');
 define('SMTP_USER', 'openclassroom@jbscreative.dev');
-define('SMTP_PASS', 'fakepassword1');
+define('SMTP_PASS', 'Permaculteur1');
 
 // DB server configuration
 define('DB_HOST', 'localhost');
