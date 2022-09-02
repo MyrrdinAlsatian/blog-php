@@ -301,6 +301,9 @@ try {
                         $id = Security::htmlSafe($_POST["id"]);
                         $adminController->deleteComment($id);
                         break;
+                    case 'edit':
+                        $adminController->updateArticle($url[2]);
+                        break;
                     default:
                         throw new Exception("ce profile n'existe pas");
                 }
