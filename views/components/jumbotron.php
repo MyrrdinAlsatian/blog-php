@@ -17,7 +17,7 @@
             🔹 Création de thème WordPress
         </p>
         <footer class="intro__btns-container">
-            <a name="intro__btn-resume" id="intro__btn-resume" class="btn btn-primary--custom" href="/Assests/PDF/CV_JeanBaptiste_Stephan.pdf" role="button" target=__blank">Mon CV</a>
-            <a name="intro__btn-knowmore" id="intro__btn-knowmore" class="btn btn-primary--custom" href="#" role="button">En savoir plus</a>
+            <a name="intro__btn-resume" id="intro__btn-resume" class="btn btn-primary--custom" href="<?php URL ?>public/Assets/PDF/CV_JeanBaptiste_Stephan.pdf" role="button" target=__blank">Mon CV</a>
+            <!-- <a name="intro__btn-knowmore" id="intro__btn-knowmore" class="btn btn-primary--custom" href="#" role="button">En savoir plus</a> -->
         </footer>
     </section>

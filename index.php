@@ -12,11 +12,20 @@ require_once('./controllers/Visitor/Visitor.controller.php');
 require_once('./controllers/Commentator/Commentator.controller.php');
 require_once('./controllers/Admin/Admin.controller.php');
 require_once("./controllers/Toolbox.class.php");
-require_once("./controllers/Secutity.class.php");
+require_once("./controllers/Security.class.php");
 
 $visitorController = new VisitorController();
 $userController = new CommentatorController();
 $adminController = new AdminController();
+
+if (!isset($_SESSION['TOKEN']['created'])) {
+    $_SESSION['TOKEN']['created'] = time();
+    $_SESSION['TOKEN']['token'] = Security::createToken();
+} elseif ($_SESSION['TOKEN']['created'] <= (time() - (CSRF_VALIDATION_INTERVAL * 1))) {
+    $_SESSION['TOKEN']['created'] = time();
+    $_SESSION['TOKEN']['token'] = Security::createToken();
+}
+print_r($_SESSION['TOKEN']);
 
 try {
     if (empty($_GET['page'])) {
@@ -291,6 +300,9 @@ try {
                     case 'deleteComment':
                         $id = Security::htmlSafe($_POST["id"]);
                         $adminController->deleteComment($id);
+                        break;
+                    case 'edit':
+                        $adminController->updateArticle($url[2]);
                         break;
                     default:
                         throw new Exception("ce profile n'existe pas");

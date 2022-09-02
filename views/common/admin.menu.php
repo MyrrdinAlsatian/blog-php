@@ -1,7 +1,7 @@
 <aside>
     <div class="top">
         <div class="logo">
-            <img src="https://via.placeholder.com/150" />
+            <!--<img src="https://via.placeholder.com/150" />-->
         </div>
         <h2>Backoffice</h2>
         <button type="button" class="btn-close" aria-label="Close"></button>
@@ -37,7 +37,7 @@
             <span class="material-icons-sharp"> comment_bank </span>
             <h3>Comment</h3>
             <?php
-            if ($comment_nbr > 0 && Security::isAdmin() || Security::isUser()) :
+            if (isset($comment_nbr) && $comment_nbr > 0 && Security::isAdmin() || Security::isUser()) :
             ?>
                 <span class="bg-danger text-light count"><?= $comment_nbr ?></span>
             <?php endif; ?>

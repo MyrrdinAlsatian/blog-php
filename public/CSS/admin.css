@@ -257,7 +257,7 @@ main .data-container table{
 }
 
 .right .top #menu-btn{
-    display: non;
+    display: none;
 }
 .right .top {
     display: flex;
@@ -403,6 +403,7 @@ main .data-container table{
     main{
         margin-top: 8rem;
         padding: 0 1rem;
+        grid-column: 1 / 4;
     }
 
     main .data-container{

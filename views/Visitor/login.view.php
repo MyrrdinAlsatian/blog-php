@@ -36,8 +36,8 @@
                                     <label class="form-label" for="typePasswordX">Mot de passe</label>
                                 </div>
 
-                                <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Mot de passe oublié?</a></p>
-
+                                <!-- <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Mot de passe oublié?</a></p>
+-->
                                 <button class="btn btn-primary" type="submit">Connection</button>
 
                             </form>

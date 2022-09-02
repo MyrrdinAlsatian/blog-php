@@ -36,7 +36,7 @@ class Toolbox
     public static function sendMail($sendTo, $subject, $content)
     {
         $headers = "from: openclassroom@jbscreative.dev";
-        $sendTo = "stephan.jeanba@gmail.com";
+        // $sendTo = "stephan.jeanba@gmail.com";
         // $subject = "test subject";
         // $content = "test content";
 

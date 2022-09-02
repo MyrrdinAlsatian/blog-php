@@ -16,13 +16,13 @@
             <div class="footer__contact-position" id="mailto">
                 <p>Fullstack developer <span>stephan.jeanba(at).gmail.com</span></p>
             </div>
-            <a name="intro__btn-footer" id="intro__btn-footer" href="/Assests/PDF/CV_jean-baptiste.pdf" role="button" class="btn--custom btn-primary--custom">Resume</a>
+            <a name="intro__btn-footer" id="intro__btn-footer" href="<?php URL ?>public/Assets/PDF/CV_jean-baptiste.pdf" role="button" class="btn--custom btn-primary--custom">Resume</a>
         </div>
         <div class="footer__menu">
             <h4>À découvrir</h4>
             <nav>
                 <ul>
-                    <li><a href="#">Blog</a></li>
+                    <li><a href="<?php URL ?>articles">Blog</a></li>
                     <?php if (empty($_SESSION["profile"])) : ?>
                         <li><a href="<?= URL ?>login">Connexion</a></li>
                         <li><a href="<?= URL ?>register">Créer un compte</a></li>

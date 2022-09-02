@@ -63,6 +63,7 @@ class VisitorController extends MainController
                 }
             } else {
                 Toolbox::ajouterMessageAlerte('Cette email est déjas liés à un compte', Toolbox::COULEUR_ORANGE);
+                header('Location: ' . URL . 'register');
             }
         } else {
             Toolbox::ajouterMessageAlerte('Ce pseudo n\'est plus disponible', Toolbox::COULEUR_ORANGE);

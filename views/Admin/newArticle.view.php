@@ -1,6 +1,6 @@
 <h1> Nouvelle article de <?= $_SESSION["profile"]["username"]; ?></h1>
 <form method="post" enctype="multipart/form-data" action="<?= URL . "backoffice/validation_newArticle" ?>">
-
+    <input type="hidden" name="CRSF" value="<?= $_SESSION["TOKEN"]["token"]; ?>" />
     <div class="mb-3">
         <label for="title" class="form-label">
             titre
@@ -31,9 +31,9 @@
         </div>
         <div class="col-6">
             <label for="image" class="form-label">
-                Image
+                Image (png,jpeg)
             </label>
-            <input type="file" class="form-control" name="image" id="image" />
+            <input type="file" class="form-control" name="image" id="image" accept="image/png,image/jpg,image/jpeg,image/gif,image/webp" />
         </div>
     </div>
     <div class="mb-3">
