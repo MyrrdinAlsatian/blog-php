@@ -22,7 +22,6 @@ if (!isset($_SESSION['TOKEN']['created'])) {
     $_SESSION['TOKEN']['created'] = time();
     $_SESSION['TOKEN']['token'] = Security::createToken();
 }
-print_r($_SESSION['TOKEN']);
 
 try {
     if (empty($_GET['page'])) {
