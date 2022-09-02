@@ -19,6 +19,7 @@ class VisitorController extends MainController
             "page_description" => " Blog OpenClassroom",
             "page_title" => "Blog jb",
             "page_data" => $articles,
+            // "page_javascript" => [""],
             'view' => "views/accueil.view.php",
             "template" => "views/common/template.php"
         ];

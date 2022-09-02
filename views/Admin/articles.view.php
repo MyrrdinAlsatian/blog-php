@@ -20,7 +20,7 @@
                 ?>
                     <tr>
                         <td>
-                            <h6 class="mt-2 mt-md-0 mb-0"> <?= $singleArticle['title'] ?></h6>
+                            <h6 class="mt-2 mt-md-0 mb-0"> <a href="<?= URL ?>article/<?= $singleArticle['id'] ?>"> <?= $singleArticle['title'] ?></a></h6>
                         </td>
                         <td>
                             <h6 class="mt-2 mt-md-0 mb-0"> <?= $singleArticle['username'] ?></h6>

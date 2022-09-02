@@ -129,7 +129,6 @@ class AdminController extends MainController
                     "page_data" => $article,
                     "comment_nbr" => $rowNbr,
                     "page_javascript" => ["profile.js"],
-
                     'view' => "views/Admin/modificationBlogItem.view.php",
                     "template" => "views/common/template.php"
                 ];

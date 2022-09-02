@@ -38,7 +38,7 @@ abstract class MainController
     {
         $data_page = [
             "page_description" => "Page permettant de gérer les erreurs",
-            "page_title" => "Page d'erreur",
+            "page_title" => "Page d'erreur $msg ",
             "msg" => $msg,
             "view" => "./views/erreur.view.php",
             "template" => "views/common/template.php"

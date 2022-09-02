@@ -16,7 +16,7 @@
             <div class="footer__contact-position" id="mailto">
                 <p>Fullstack developer <span>stephan.jeanba(at).gmail.com</span></p>
             </div>
-            <a name="intro__btn-footer" id="intro__btn-footer" href="<?php URL ?>public/Assets/PDF/CV_jean-baptiste.pdf" role="button" class="btn--custom btn-primary--custom">Resume</a>
+            <a name="intro__btn-footer" id="intro__btn-footer" href="<?php URL ?>public/Assets/PDF/CV_JeanBaptiste_Stephan.pdf" role="button" class="btn--custom btn-primary--custom">Resume</a>
         </div>
         <div class="footer__menu">
             <h4>À découvrir</h4>
@@ -34,7 +34,7 @@
             <h4>Suivez moi !</h4>
             <nav>
                 <ul>
-                    <li><a href="#">Linkedin</a></li>
+                    <li><a href="https://www.linkedin.com/in/jean-baptiste-stephan/">Linkedin</a></li>
                     <li><a href="#">Instagram</a></li>
                     <li><a href="#">Youtube</a></li>
                     <li><a href="#">Twitch</a></li>
