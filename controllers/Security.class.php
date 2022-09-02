@@ -54,8 +54,6 @@ class Security
     public static function validateToken($token): bool
     {
         $parts = explode('|&|', self::urlSafeDecode($token));
-        print_r($token);
-        die();
         if (count($parts) == 3) {
             $hash = hash_hmac('sha256', session_id() . $parts[1], $parts[2], CRSF_TOKEN_SECRET, true);
             if (hash_equals($hash, $parts[0])) {

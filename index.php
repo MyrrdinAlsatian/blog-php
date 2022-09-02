@@ -47,9 +47,12 @@ try {
                         $mail = Security::emailSafe($_POST["mail"]);
                         $password = Security::htmlSafe($_POST['password']);
                         $userController->validation_login($mail, $password);
+                    } else {
+                        Toolbox::ajouterMessageAlerte("Le Token présent ne correspond pas à votre session", Toolbox::COULEUR_ROUGE);
+                        header('Location: ' . URL . "login");
                     }
                 } else {
-                    Toolbox::ajouterMessageAlerte("Mot de passe ou email non renseigné |" . Security::validateToken($_POST['token']) . "|||", Toolbox::COULEUR_ROUGE);
+                    Toolbox::ajouterMessageAlerte("Aucun token présent", Toolbox::COULEUR_ROUGE);
                     header('Location: ' . URL . "login");
                 }
             } else {
